@@ -1,0 +1,38 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{"SAIOA HASI" | translate}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <form>
+      <ion-item>
+        <ion-label floating>{{"Emaila" | translate}}</ion-label>
+        <ion-input [(ngModel)]="user.email" name="email" type="text" autocapitalize="off" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>{{"Pasahitza" | translate}}</ion-label>
+        <ion-input [(ngModel)]="user.password" name="password" type="password" required>
+        </ion-input>
+      </ion-item>
+      <div padding>
+        <button ion-button (click)="login()" type="submit" color="primary" block>
+          {{"Sartu" | translate}}
+        </button>
+
+        <button ion-button (click)="signin()" type="submit" color="secondary" block>
+          {{"Erregistratu" | translate}}
+        </button>
+      </div>
+    </form>
+  </ion-list>
+</ion-content>

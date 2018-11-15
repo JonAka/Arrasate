@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{"ALBISTEAK" | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list *ngFor="let item of albisteList">
+
+    <ion-item (click)="openNewsModal(item['@id'])">
+      <img src="{{item.image.download}}" />
+      <h2 text-wrap>
+        {{item.title}}
+      </h2>
+
+    </ion-item>
+    <ion-item>
+      <p>{{item.subject}}</p>
+    </ion-item>
+
+  </ion-list>
+
+
+</ion-content>

@@ -1,0 +1,41 @@
+<!--
+  Generated template for the NewsdetailmodalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{albisteDetail?.title}}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="closeModal()">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card class="news-card">
+    <ion-card-content>
+      <ion-card-title>
+        {{albisteDetail?.title}}
+      </ion-card-title>
+      <div [innerHtml]="albisteDetail?.text.data"></div>
+      <img src="{{albisteDetail?.image.download}}" />
+      {{albisteDetail?.effectiveDate | date:'MM/dd/yyyy'}}
+    </ion-card-content>
+
+    <ion-fab button end padding [hidden]="favorite">
+      <button ion-fab (click)="saveNewsData()">
+      <ion-icon name="heart-outline"></ion-icon>
+    </button>
+    </ion-fab>
+  </ion-card>
+
+
+</ion-content>

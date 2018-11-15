@@ -1,0 +1,30 @@
+{
+    "android": {
+        "debug": {
+            "keystore": "arrasate.keystore",
+            "storePassword": "CodeSyntax",
+            "alias": "arrasate",
+            "password": "CodeSyntax",
+            "keystoreType": ""
+        },
+        "release": {
+            "keystore": "arrasate.keystore",
+            "storePassword": "CodeSyntax",
+            "alias": "arrasate",
+            "password": "CodeSyntax",
+            "keystoreType": ""
+        }
+    },
+    "ios": {
+        "debug": {
+            "buildFlag": [
+                "-UseModernBuildSystem=0"
+            ]
+        },
+        "release": {
+            "buildFlag": [
+                "-UseModernBuildSystem=0"
+            ]
+        }
+    }
+}

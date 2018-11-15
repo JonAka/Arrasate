@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title> {{ "EZARPENAK" | translate }}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="openStorage()">
+        <ion-icon name="logo-buffer"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+
+    <ion-item>
+
+      <ion-toggle [(ngModel)]="isToggled" (ionChange)="suscribeNoti()"></ion-toggle>
+
+      <ion-label>
+        {{ "Notifikazioak" | translate }}
+      </ion-label>
+
+      <ion-icon name='notifications' item-start></ion-icon>
+
+    </ion-item>
+
+    <ion-item>
+
+      <ion-label>
+        {{ "Hizkuntza" | translate }}
+      </ion-label>
+
+      <ion-select [(ngModel)]="language" (ionChange)="onSelectChange($event)">
+
+        <ion-option value="eu">EUSKERA</ion-option>
+        <ion-option value="es">{{ "GAZTELERA" | translate}}</ion-option>
+
+      </ion-select>
+
+      <ion-icon name='book' item-start></ion-icon>
+
+    </ion-item>
+
+    <ion-item>
+
+      <button ion-button round (click)="openLogin()">
+        {{loginMsg | translate}}
+      </button>
+    </ion-item>
+
+  </ion-list>
+
+
+</ion-content>

@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{agendaDetail?.title}}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="closeModal()">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card class="event-card">
+    <ion-card-content>
+      <ion-card-title>
+        {{agendaDetail?.title}}
+      </ion-card-title>
+      <div [innerHtml]="agendaDetail?.text.data"></div>
+      <div [innerHtml]="agendaDetail?.description.data"></div>
+      <img src="{{agendaDetail?.image.download}}" />
+      {{agendaDetail?.effectiveDate | date:'MM/dd/yyyy'}}
+    </ion-card-content>
+
+    <ion-fab button end padding [hidden]="favorite">
+      <button ion-fab (click)="saveData()">
+        <ion-icon name="heart-outline"></ion-icon>
+      </button>
+    </ion-fab>
+  </ion-card>
+
+
+
+</ion-content>

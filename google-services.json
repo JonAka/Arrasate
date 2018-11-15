@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "71595307485",
+    "firebase_url": "https://arrasate-app-4c31a.firebaseio.com",
+    "project_id": "arrasate-app-4c31a",
+    "storage_bucket": "arrasate-app-4c31a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71595307485:android:eeca460af004d7ac",
+        "android_client_info": {
+          "package_name": "com.arrasate.arrasate_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "71595307485-rj1a1amp39jvgtmp37di4qqfp8ksdffe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.arrasate.arrasate_app",
+            "certificate_hash": "f2d009012e21367e1e550cf80d9d6521a42ffb3e"
+          }
+        },
+        {
+          "client_id": "71595307485-apogfbub0spbj3d437gpb8u6vmjr0frj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqmOnNX7YwAEpcnSRRaVkcZQJrwxfj5N0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "71595307485-apogfbub0spbj3d437gpb8u6vmjr0frj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

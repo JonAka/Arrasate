@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>ARRASATEKO UDALA</ion-title>
+  </ion-navbar>
+
+
+</ion-header>
+
+<ion-content class="contentBackgroud">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="image-content">
+
+    <ion-slides *ngIf="newsImage && newsImage.length" autoplay="3000" loop="true" speed="3000"
+      autoplayDisableOnInteraction="false" (click)=openNews()>
+      <ion-slide padding *ngFor="let item of newsImage">
+        <img class="img" src="{{item.image.download}}" />
+        <p>{{item.title}}</p>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <div padding [innerHTML]="data"></div>
+</ion-content>
