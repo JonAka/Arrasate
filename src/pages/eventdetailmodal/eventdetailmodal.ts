@@ -24,7 +24,7 @@ export class EventdetailmodalPage {
   getEventUrl: string;
   items: any = [];
   key: string = 'items';
-  isFavorite = false;
+  isFavorite:boolean = false;
 
   constructor(public arrasateService: ArrasateService,
     public navCtrl: NavController,
@@ -60,21 +60,21 @@ export class EventdetailmodalPage {
       } else {
         this.storage.set(this.key, [this.agendaDetail]);
       }
+      this.isFavorite = true;
     });
     let alert = this.alertCtrl.create({
-      title: 'GUSTOKOENETARA GEHITUTA !',
+      subTitle: 'GUSTOKOENETARA GEHITUTA !',
       buttons: ['Ados']
     });
     alert.present();
   }
-  removeEventData() {
-    return this.storage.get(this.key).then(res => {
-      if (res) {
-        var index = res.indexOf(this.agendaDetail);
-        res.splice(index, 1);
-        return this.storage.set(this.key, res);
-      }
-    });
+  removeEventData(count) {
+    this.storage.get(this.key).then(res => {
+      res.splice(count, 1);
+      this.storage.set(this.key, res).then(()=>{
+        this.isFavorite=false;
+      });
+});
   }
 }
 

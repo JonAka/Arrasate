@@ -29,7 +29,7 @@
 
   <div [ngSwitch]="type">
     <ion-list *ngSwitchCase="'albisteak'">
-      <ion-item *ngFor="let item of itemNews_list" padding>
+      <ion-item *ngFor="let item of itemNews_list;let i = index" padding>
 
         <img src="{{item.image.download}}" />
 
@@ -37,14 +37,17 @@
           {{item.title}}
         </h2>
 
-        <ion-buttons end padding>
+        <button ion-button color="danger" (click)="removeNewsData(i)">
           <ion-icon name="trash"></ion-icon>
-        </ion-buttons>
+          Ezabatu
+        </button>
       </ion-item>
+
+
     </ion-list>
   </div>
 
-  <div [ngSwitch]="type">
+  <div [ngSwitch]=" type">
     <ion-list *ngSwitchCase="'agenda'">
       <ion-item *ngFor="let item of itemEvent_list">
 
@@ -53,13 +56,11 @@
         <h2 text-wrap>
           {{item.title}}
         </h2>
-
-        <ion-buttons end padding>
+        <button ion-button color="danger" (click)="removeEventData(i)">
           <ion-icon name="trash"></ion-icon>
-        </ion-buttons>
-
+          Ezabatu
+        </button>
       </ion-item>
-
     </ion-list>
   </div>
 

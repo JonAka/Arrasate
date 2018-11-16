@@ -21,6 +21,7 @@ export class NewsdetailmodalPage {
 
   albisteDetail;
   items: any[];
+  isFavorite:boolean = false;
   key: string = 'albisteItem';
 
   constructor(private storage: Storage,
@@ -53,17 +54,21 @@ export class NewsdetailmodalPage {
       } else {
         this.storage.set(this.key, [this.albisteDetail]);
       }
+      this.isFavorite = true;
     });
     let alert = this.alertCtrl.create({
-      title: 'GUSTOKOENETARA GEHITUTA !',
+      subTitle: 'GUSTOKOENETARA GEHITUTA !',
       buttons: ['Ados']
     });
     alert.present();
   }
-  /* renoveNewsData(count) {
-    this.storage.get(this.key).then(res => {
+  removeNewsData(count){
+    this.storage.get('albisteItem').then(res => {
       res.splice(count, 1);
-      this.storage.set('items', res);
+      this.storage.set('albisteItem', res).then(()=>{
+        this.isFavorite=false;
+      });
 });
-  } */
+
+}
 }

@@ -22,12 +22,15 @@
       <div [innerHtml]="agendaDetail?.text.data"></div>
       <div [innerHtml]="agendaDetail?.description.data"></div>
       <img src="{{agendaDetail?.image.download}}" />
-      {{agendaDetail?.effectiveDate | date:'MM/dd/yyyy'}}
+      {{agendaDetail?.effectiveDate | date:'yyyy/MM/dd'}}
     </ion-card-content>
 
     <ion-fab button end padding [hidden]="favorite">
-      <button ion-fab (click)="saveData()">
+      <button ion-fab (click)="saveEventData()" *ngIf="!isFavorite">
         <ion-icon name="heart-outline"></ion-icon>
+      </button>
+      <button ion-fab (click)="removeEventData()" *ngIf="isFavorite">
+        <ion-icon name="heart"></ion-icon>
       </button>
     </ion-fab>
   </ion-card>

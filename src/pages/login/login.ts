@@ -28,7 +28,7 @@ export class LoginPage {
       .then((user) => {
         // El usuario se ha creado correctamente
         let alert = this.alertCtrl.create({
-          title: 'ERABILTZAILEA ERREGISTRATUA',
+          subTitle: 'ERABILTZAILEA ERREGISTRATUA',
           buttons: ['Ados']
         });
         alert.present();
@@ -45,7 +45,7 @@ export class LoginPage {
   login() {
     this.auth.loginUser(this.user.email, this.user.password).then((user) => {
       let alert = this.alertCtrl.create({
-        subTitle: 'Ongi etorri, ' + this.user,
+        subTitle: 'Ongi etorri, ' + this.user.email,
         buttons: ['Ados']
       });
       alert.present();

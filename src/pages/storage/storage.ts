@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { ArrasateService } from '../../providers/arrasate-service/arrasate-service';
 import { Storage } from '@ionic/storage';
 
@@ -23,6 +23,7 @@ export class StoragePage {
   constructor(public arrasateService: ArrasateService,
     private storage: Storage,
     public navCtrl: NavController,
+    public alertCtrl: AlertController,
     public navParams: NavParams) {
     /*   this.getAlbisteak();
       this.getAgenda(); */
@@ -31,7 +32,8 @@ export class StoragePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad StoragePage');
     this.getEventItems();
-    this.getNewsItems()
+    this.getNewsItems();
+
   }
   getEventItems() {
     this.storage.get('items').then(res => {
@@ -46,7 +48,34 @@ export class StoragePage {
       console.log("ITEM_LIST: ", this.itemNews_list);
     })
   }
-  getAlbisteak() {
+  removeNewsData(count){
+    this.storage.get('albisteItem').then(res => {
+      res.splice(count, 1);
+      this.storage.set('albisteItem', res).then(()=>{
+        this.getNewsItems();
+      });
+      let alert = this.alertCtrl.create({
+        subTitle: 'EZABATUTA !',
+        buttons: ['Ados']
+      });
+      alert.present();
+});
+  }
+
+  removeEventData(count){
+    this.storage.get('items').then(res => {
+      res.splice(count, 1);
+      this.storage.set('items', res).then(()=>{
+        this.getEventItems();
+      });
+      let alert = this.alertCtrl.create({
+        subTitle: 'EZABATUTA !',
+        buttons: ['Ados']
+      });
+      alert.present();
+});
+  }
+ /*  getAlbisteak() {
     this.arrasateService.getAlbisteak().subscribe(res => {
       this.albisteList = res['items'];
       console.log("item: ", this.albisteList);
@@ -56,6 +85,6 @@ export class StoragePage {
     this.arrasateService.getAgenda().subscribe(res => {
       this.agendaList = res['items'];
     })
-  }
+  } */
 
 }

@@ -27,13 +27,16 @@
       </ion-card-title>
       <div [innerHtml]="albisteDetail?.text.data"></div>
       <img src="{{albisteDetail?.image.download}}" />
-      {{albisteDetail?.effectiveDate | date:'MM/dd/yyyy'}}
+      {{albisteDetail?.effectiveDate | date:'yyyy/MM/dd/'}}
     </ion-card-content>
 
     <ion-fab button end padding [hidden]="favorite">
-      <button ion-fab (click)="saveNewsData()">
-      <ion-icon name="heart-outline"></ion-icon>
-    </button>
+      <button ion-fab (click)="saveNewsData()" *ngIf="!isFavorite">
+        <ion-icon name="heart-outline"></ion-icon>
+      </button>
+      <button ion-fab (click)="removeNewsData()" *ngIf="isFavorite">
+        <ion-icon name="heart"></ion-icon>
+      </button>
     </ion-fab>
   </ion-card>
 
