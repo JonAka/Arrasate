@@ -1,7 +1,7 @@
-import { Component ,ViewChild} from '@angular/core';
-import { NavController, NavParams, Slides} from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, Slides } from 'ionic-angular';
 
-import { TabsPage } from '../tabs/tabs';
+import { LoginPage } from '../login/login';
 /**
  * Generated class for the MainPage page.
  *
@@ -15,7 +15,7 @@ import { TabsPage } from '../tabs/tabs';
   templateUrl: 'main.html',
 })
 export class MainPage {
-  
+
   @ViewChild(Slides) slides: Slides;
   skipMsg: string = "Itxi";
 
@@ -23,11 +23,11 @@ export class MainPage {
   }
 
   skip() {
-    this.navCtrl.push(TabsPage);
+    this.navCtrl.push(LoginPage);
   }
   slideChanged() {
     if (this.slides.isEnd())
       this.skipMsg = "Ados, ulertuta!";
-      
+
   }
 }

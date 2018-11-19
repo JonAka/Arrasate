@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController} from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 
 import { ArrasateService } from '../../providers/arrasate-service/arrasate-service';
@@ -24,7 +24,7 @@ export class EventdetailmodalPage {
   getEventUrl: string;
   items: any = [];
   key: string = 'items';
-  isFavorite:boolean = false;
+  isFavorite: boolean = false;
 
   constructor(public arrasateService: ArrasateService,
     public navCtrl: NavController,
@@ -71,10 +71,10 @@ export class EventdetailmodalPage {
   removeEventData(count) {
     this.storage.get(this.key).then(res => {
       res.splice(count, 1);
-      this.storage.set(this.key, res).then(()=>{
-        this.isFavorite=false;
+      this.storage.set(this.key, res).then(() => {
+        this.isFavorite = false;
       });
-});
+    });
   }
 }
 

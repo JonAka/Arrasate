@@ -48,10 +48,10 @@ export class StoragePage {
       console.log("ITEM_LIST: ", this.itemNews_list);
     })
   }
-  removeNewsData(count){
+  removeNewsData(count) {
     this.storage.get('albisteItem').then(res => {
       res.splice(count, 1);
-      this.storage.set('albisteItem', res).then(()=>{
+      this.storage.set('albisteItem', res).then(() => {
         this.getNewsItems();
       });
       let alert = this.alertCtrl.create({
@@ -59,13 +59,13 @@ export class StoragePage {
         buttons: ['Ados']
       });
       alert.present();
-});
+    });
   }
 
-  removeEventData(count){
+  removeEventData(count) {
     this.storage.get('items').then(res => {
       res.splice(count, 1);
-      this.storage.set('items', res).then(()=>{
+      this.storage.set('items', res).then(() => {
         this.getEventItems();
       });
       let alert = this.alertCtrl.create({
@@ -73,18 +73,18 @@ export class StoragePage {
         buttons: ['Ados']
       });
       alert.present();
-});
+    });
   }
- /*  getAlbisteak() {
-    this.arrasateService.getAlbisteak().subscribe(res => {
-      this.albisteList = res['items'];
-      console.log("item: ", this.albisteList);
-    })
-  }
-  getAgenda() {
-    this.arrasateService.getAgenda().subscribe(res => {
-      this.agendaList = res['items'];
-    })
-  } */
+  /*  getAlbisteak() {
+     this.arrasateService.getAlbisteak().subscribe(res => {
+       this.albisteList = res['items'];
+       console.log("item: ", this.albisteList);
+     })
+   }
+   getAgenda() {
+     this.arrasateService.getAgenda().subscribe(res => {
+       this.agendaList = res['items'];
+     })
+   } */
 
 }

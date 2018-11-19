@@ -49,7 +49,8 @@ export class LoginPage {
         buttons: ['Ados']
       });
       alert.present();
-      this.navCtrl.push(HomePage);
+      this.navCtrl.setRoot(HomePage);
+      console.log("USER: " ,this.user.email);
     }
     )
       .catch(err => {

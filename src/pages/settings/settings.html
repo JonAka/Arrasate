@@ -1,5 +1,8 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton="true">
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
     <ion-title> {{ "EZARPENAK" | translate }}</ion-title>
     <ion-buttons end>
       <button ion-button (click)="openStorage()">
@@ -44,8 +47,8 @@
 
     <ion-item>
 
-      <button ion-button round (click)="openLogin()">
-        {{loginMsg | translate}}
+      <button ion-button round (click)="logout()">
+        {{logoutMsg | translate}}
       </button>
     </ion-item>
 

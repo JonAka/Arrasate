@@ -40,7 +40,7 @@ export class HomePage {
   openNews() {
     this.navCtrl.push(NewsPage);
   }
-  
+
   doRefresh(refresher) {
     this.arrasateService.getUdalak().subscribe(res => {
       this.udalakList = res;

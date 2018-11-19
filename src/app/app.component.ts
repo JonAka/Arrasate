@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-//import { Storage } from '@ionic/storage';
+
 
 import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
@@ -23,10 +23,10 @@ export class MyApp {
   language = 'eu';
   lang;
 
-  // rootPage: any = LoginPage;
+
   rootPage: any = MainPage
 
-  pages: Array<{ title: string, component: any }>;
+  pages: Array<{ icon: string, title: string, component: any, }>;
 
   constructor(public platform: Platform, public firebase: Firebase, translate: TranslateService, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
@@ -34,17 +34,12 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
 
-      { title: 'Hasiera', component: HomePage },
-      { title: 'Albisteak', component: NewsPage },
-      { title: 'Agenda', component: EventsPage },
-      { title: 'Ezarpenak', component: SettingsPage }
+      { icon: 'home', title: 'Hasiera', component: HomePage },
+      { icon: 'paper', title: "Albisteak", component: NewsPage },
+      { icon: 'book', title: 'Agenda', component: EventsPage },
+      { icon: 'options', title: 'Ezarpenak', component: SettingsPage }
     ];
-/*     this.firebase.hasPermission().then(res=>{
-      console.log("FIREBASE HAS PERMISSION: ", res);
-    })
-    this.firebase.onNotificationOpen().subscribe(res => {
-      console.log("res: ", res);
-    }) */
+
     this.lang = translate.setDefaultLang(this.language);
   }
 

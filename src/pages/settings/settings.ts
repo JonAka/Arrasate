@@ -6,7 +6,7 @@ import { StoragePage } from '../../pages/storage/storage';
 
 import { TranslateService } from '@ngx-translate/core';
 import { ArrasateService } from '../../providers/arrasate-service/arrasate-service';
-
+import { AuthProvider } from '../../providers/auth/auth';
 /**
  * Generated class for the SettingsPage page.
  *
@@ -21,14 +21,20 @@ import { ArrasateService } from '../../providers/arrasate-service/arrasate-servi
 })
 export class SettingsPage {
   public isToggled: boolean;
-  loginMsg = "Saioa hasi";
+  logoutMsg = "Saioa itxi";
 
-  constructor(public alertCtrl: AlertController, private storage: Storage, public translate: TranslateService, public navCtrl: NavController, public navParams: NavParams, public arrasateService: ArrasateService) {
+  constructor(public auth: AuthProvider, public alertCtrl: AlertController, private storage: Storage, public translate: TranslateService, public navCtrl: NavController, public navParams: NavParams, public arrasateService: ArrasateService) {
     this.isToggled = false;
   }
 
-  openLogin() {
+  logout() {
+    this.auth.logout();
     this.navCtrl.push(LoginPage);
+    let alert = this.alertCtrl.create({
+      subTitle: "Saioa itxi duzu!",
+      buttons: ["ados"]
+    });
+    alert.present();
   }
   openStorage() {
     this.navCtrl.push(StoragePage);
@@ -46,7 +52,7 @@ export class SettingsPage {
       this.arrasateService
         .enableNotifications(slug)
         .then(data => {
-          if (data) {         
+          if (data) {
             let alert = this.alertCtrl.create({
               title: "OK",
               subTitle: "Notifications enabled correctly",
