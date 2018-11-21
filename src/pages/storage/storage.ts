@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { ArrasateService } from '../../providers/arrasate-service/arrasate-service';
-import { Storage } from '@ionic/storage';
 import { AngularFireDatabase } from 'angularfire2/database';
 import firebase from 'firebase';
 import { Observable } from 'rxjs';
