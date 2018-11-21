@@ -27,7 +27,6 @@ export class StoragePage {
   newsitem;
   eventitem;
   constructor(public arrasateService: ArrasateService,
-    private storage: Storage,
     public navCtrl: NavController,
     public alertCtrl: AlertController,
     public navParams: NavParams,
