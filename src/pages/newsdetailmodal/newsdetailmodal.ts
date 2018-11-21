@@ -53,14 +53,13 @@ export class NewsdetailmodalPage {
   }
   saveNewsData() {
 
-    
-    if (!this.user) {
-      console.log("ERROR", this.error);
-    }
-    else {
+
+    if (this.user) {
+
       console.log(".", this.user);
       const albi = this.db.object('/user/' + this.user + '/albistea');
-      albi.update({ url: this.albisteDetail });
+      albi.update({ url: [this.albisteDetail] });
+
     }
     this.isFavorite = true;
     let alert = this.alertCtrl.create({
@@ -71,8 +70,8 @@ export class NewsdetailmodalPage {
   }
   removeNewsData() {
     const albi = this.db.object('/user/' + this.user + '/albistea');
-      albi.remove();
-      this.isFavorite = false;
+    albi.remove();
+    this.isFavorite = false;
   }
 
 }

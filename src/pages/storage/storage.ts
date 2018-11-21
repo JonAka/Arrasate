@@ -24,6 +24,7 @@ export class StoragePage {
   agendaList;
   user = firebase.auth().currentUser.uid;
   test: Observable<any>;
+  item;
   constructor(public arrasateService: ArrasateService,
     private storage: Storage,
     public navCtrl: NavController,
@@ -49,23 +50,21 @@ export class StoragePage {
   getNewsItems() {
     // this.test = this.db.list('/user/' + this.user + '/albistea/url').valueChanges();
     this.db.object('user/'+this.user+ '/albistea/url').valueChanges().subscribe(res => {
-      console.log("RES: ", res);
+      this.item = res;
+      console.log("RES: ", this.item);
     });
 
 
   }
-  removeNewsData(count) {
-    this.storage.get('albisteItem').then(res => {
-      res.splice(count, 1);
-      this.storage.set('albisteItem', res).then(() => {
-        this.getNewsItems();
-      });
+  removeNewsData() {
+    const albi = this.db.object('/user/' + this.user + '/albistea');
+      albi.remove();
       let alert = this.alertCtrl.create({
         subTitle: 'EZABATUTA !',
         buttons: ['Ados']
       });
       alert.present();
-    });
+    
   }
 
   removeEventData(count) {

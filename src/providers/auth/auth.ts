@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import firebase from 'firebase';
 import {AngularFireDatabase} from 'angularfire2/database';
-import { UrlSerializer } from 'ionic-angular';
+
 
 @Injectable()
 export class AuthProvider {
