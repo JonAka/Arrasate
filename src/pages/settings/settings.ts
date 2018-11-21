@@ -26,6 +26,7 @@ export class SettingsPage {
   constructor(public auth: AuthProvider, public alertCtrl: AlertController, private storage: Storage, public translate: TranslateService, public navCtrl: NavController, public navParams: NavParams, public arrasateService: ArrasateService) {
     this.isToggled = false;
   }
+  
 
   logout() {
     this.auth.logout();
@@ -56,7 +57,8 @@ export class SettingsPage {
             let alert = this.alertCtrl.create({
               title: "OK",
               subTitle: "Notifications enabled correctly",
-              buttons: ["OK"]
+              buttons: ["OK"],
+              
             });
             alert.present();
           } else {

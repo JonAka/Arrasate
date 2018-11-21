@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { ArrasateService } from '../../providers/arrasate-service/arrasate-service';
 import { Storage } from '@ionic/storage';
-
+import { AngularFireDatabase } from 'angularfire2/database';
+import firebase from 'firebase';
+import { Observable } from 'rxjs';
 /**
  * Generated class for the StoragePage page.
  *
@@ -20,13 +22,15 @@ export class StoragePage {
   itemNews_list;
   albisteList;
   agendaList;
+  user = firebase.auth().currentUser.uid;
+  test: Observable<any>;
   constructor(public arrasateService: ArrasateService,
     private storage: Storage,
     public navCtrl: NavController,
     public alertCtrl: AlertController,
-    public navParams: NavParams) {
-    /*   this.getAlbisteak();
-      this.getAgenda(); */
+    public navParams: NavParams,
+    public db: AngularFireDatabase) {
+
   }
 
   ionViewDidLoad() {
@@ -43,10 +47,12 @@ export class StoragePage {
   }
 
   getNewsItems() {
-    this.storage.get('albisteItem').then(res => {
-      this.itemNews_list = res;
-      console.log("ITEM_LIST: ", this.itemNews_list);
-    })
+    // this.test = this.db.list('/user/' + this.user + '/albistea/url').valueChanges();
+    this.db.object('user/'+this.user+ '/albistea/url').valueChanges().subscribe(res => {
+      console.log("RES: ", res);
+    });
+
+
   }
   removeNewsData(count) {
     this.storage.get('albisteItem').then(res => {
@@ -75,16 +81,4 @@ export class StoragePage {
       alert.present();
     });
   }
-  /*  getAlbisteak() {
-     this.arrasateService.getAlbisteak().subscribe(res => {
-       this.albisteList = res['items'];
-       console.log("item: ", this.albisteList);
-     })
-   }
-   getAgenda() {
-     this.arrasateService.getAgenda().subscribe(res => {
-       this.agendaList = res['items'];
-     })
-   } */
-
 }

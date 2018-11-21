@@ -31,6 +31,7 @@ import { IonicStorageModule } from '@ionic/storage';
 
 
 
+
 export const firebaseConfig = {
 
   apiKey: "AIzaSyCjzEJDf7-KCvxMgHEJLRBumC3xWNJSTUQ",

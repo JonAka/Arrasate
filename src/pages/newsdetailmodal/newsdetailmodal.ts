@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 
+import firebase from 'firebase';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { ArrasateService } from '../../providers/arrasate-service/arrasate-service';
 //import { HttpClient } from '@angular/common/http';
 
@@ -21,14 +22,19 @@ export class NewsdetailmodalPage {
 
   albisteDetail;
   items: any[];
-  isFavorite:boolean = false;
+  isFavorite: boolean = false;
   key: string = 'albisteItem';
-
-  constructor(private storage: Storage,
+  item;
+  users;
+  error;
+  url;
+  user = firebase.auth().currentUser.uid;
+  constructor(
     public navCtrl: NavController,
     public alertCtrl: AlertController,
     public navParams: NavParams,
-    public arrasateService: ArrasateService
+    public arrasateService: ArrasateService,
+    public db: AngularFireDatabase
     /*public http: HttpClient*/) {
 
     this.getAlbistedetail(navParams.get('url'));
@@ -40,35 +46,33 @@ export class NewsdetailmodalPage {
   getAlbistedetail(item_url) {
     this.arrasateService.getAlbisteDetail(item_url).subscribe(res => {
       this.albisteDetail = res;
-
+      this.url = item_url;
       console.log('ITEM: ', item_url);
 
     })
   }
   saveNewsData() {
 
-    this.storage.get(this.key).then(res => {
-      if (res) {
-        res.push(this.albisteDetail);
-        this.storage.set(this.key, res);
-      } else {
-        this.storage.set(this.key, [this.albisteDetail]);
-      }
-      this.isFavorite = true;
-    });
+    
+    if (!this.user) {
+      console.log("ERROR", this.error);
+    }
+    else {
+      console.log(".", this.user);
+      const albi = this.db.object('/user/' + this.user + '/albistea');
+      albi.update({ url: this.albisteDetail });
+    }
+    this.isFavorite = true;
     let alert = this.alertCtrl.create({
       subTitle: 'GUSTOKOENETARA GEHITUTA !',
       buttons: ['Ados']
     });
     alert.present();
   }
-  removeNewsData(count){
-    this.storage.get('albisteItem').then(res => {
-      res.splice(count, 1);
-      this.storage.set('albisteItem', res).then(()=>{
-        this.isFavorite=false;
-      });
-});
+  removeNewsData() {
+    const albi = this.db.object('/user/' + this.user + '/albistea');
+      albi.remove();
+      this.isFavorite = false;
+  }
 
-}
 }

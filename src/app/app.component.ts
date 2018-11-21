@@ -22,6 +22,7 @@ export class MyApp {
 
   language = 'eu';
   lang;
+ 
 
 
   rootPage: any = MainPage
