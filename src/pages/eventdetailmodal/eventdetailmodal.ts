@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
-
+import firebase from 'firebase';
 import { ArrasateService } from '../../providers/arrasate-service/arrasate-service';
+import { AngularFireDatabase } from 'angularfire2/database';
 
-import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the EventdetailmodalPage page.
@@ -25,13 +25,13 @@ export class EventdetailmodalPage {
   items: any = [];
   key: string = 'items';
   isFavorite: boolean = false;
-
+  user = firebase.auth().currentUser.uid;
   constructor(public arrasateService: ArrasateService,
     public navCtrl: NavController,
     public alertCtrl: AlertController,
     public navParams: NavParams,
     public http: HttpClient,
-    private storage: Storage) {
+    public db: AngularFireDatabase) {
 
     this.getAgendaDetail(navParams.get('url'))
     this.getEventUrl = navParams.get('url');
@@ -53,28 +53,25 @@ export class EventdetailmodalPage {
   }
   saveEventData() {
 
-    this.storage.get(this.key).then(res => {
-      if (res) {
-        res.push(this.agendaDetail);
-        this.storage.set(this.key, res);
-      } else {
-        this.storage.set(this.key, [this.agendaDetail]);
-      }
-      this.isFavorite = true;
-    });
+    if (this.user) {
+
+      console.log(".", this.user);
+      const agend = this.db.object('/user/' + this.user + '/agenda');
+      agend.update({ url: [this.agendaDetail] });
+
+    }
+    this.isFavorite = true;
     let alert = this.alertCtrl.create({
       subTitle: 'GUSTOKOENETARA GEHITUTA !',
       buttons: ['Ados']
     });
     alert.present();
   }
-  removeEventData(count) {
-    this.storage.get(this.key).then(res => {
-      res.splice(count, 1);
-      this.storage.set(this.key, res).then(() => {
-        this.isFavorite = false;
-      });
-    });
+  removeEventData() {
+
+    const agend = this.db.object('/user/' + this.user + '/agenda');
+    agend.remove();
+    this.isFavorite = false;
   }
 }
 

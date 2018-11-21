@@ -24,7 +24,8 @@ export class StoragePage {
   agendaList;
   user = firebase.auth().currentUser.uid;
   test: Observable<any>;
-  item;
+  newsitem;
+  eventitem;
   constructor(public arrasateService: ArrasateService,
     private storage: Storage,
     public navCtrl: NavController,
@@ -41,17 +42,17 @@ export class StoragePage {
 
   }
   getEventItems() {
-    this.storage.get('items').then(res => {
-      this.itemEvent_list = res;
-      console.log("ITEM_LIST: ", this.itemEvent_list);
-    })
+    this.db.object('user/'+this.user+ '/agenda/url').valueChanges().subscribe(res => {
+      this.eventitem = res;
+      console.log("RES: ", this.eventitem);
+    });
   }
 
   getNewsItems() {
     // this.test = this.db.list('/user/' + this.user + '/albistea/url').valueChanges();
     this.db.object('user/'+this.user+ '/albistea/url').valueChanges().subscribe(res => {
-      this.item = res;
-      console.log("RES: ", this.item);
+      this.newsitem = res;
+      console.log("RES: ", this.newsitem);
     });
 
 
@@ -67,17 +68,13 @@ export class StoragePage {
     
   }
 
-  removeEventData(count) {
-    this.storage.get('items').then(res => {
-      res.splice(count, 1);
-      this.storage.set('items', res).then(() => {
-        this.getEventItems();
-      });
-      let alert = this.alertCtrl.create({
-        subTitle: 'EZABATUTA !',
-        buttons: ['Ados']
-      });
-      alert.present();
+  removeEventData() {
+    const agend = this.db.object('/user/' + this.user + '/agenda');
+    agend.remove();
+    let alert = this.alertCtrl.create({
+      subTitle: 'EZABATUTA !',
+      buttons: ['Ados']
     });
+    alert.present();
   }
 }

@@ -33,7 +33,7 @@
 
   <div [ngSwitch]="type">
     <ion-list *ngSwitchCase="'albisteak'">
-      <ion-item *ngFor="let item of item" padding>
+      <ion-item *ngFor="let item of newsitem" padding>
 
         <img src="{{item.image.download}}" />
 
@@ -53,7 +53,7 @@
 
   <div [ngSwitch]=" type">
     <ion-list *ngSwitchCase="'agenda'">
-      <ion-item *ngFor="let item of itemEvent_list">
+      <ion-item *ngFor="let item of eventitem">
 
         <img src="{{item.image.download}}" />
 

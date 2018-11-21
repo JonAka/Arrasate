@@ -53,7 +53,6 @@ export class NewsdetailmodalPage {
   }
   saveNewsData() {
 
-
     if (this.user) {
 
       console.log(".", this.user);
