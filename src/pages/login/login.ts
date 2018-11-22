@@ -3,14 +3,6 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { HomePage } from '../home/home';
 
-/**
- * Generated class for the LoginPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-
-
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
@@ -18,9 +10,10 @@ import { HomePage } from '../home/home';
 export class LoginPage {
 
   user = { email: '', password: '' };
-
+  logged: boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthProvider,
     public alertCtrl: AlertController) {
+
   }
 
   signin() {
@@ -42,6 +35,12 @@ export class LoginPage {
       })
 
   }
+  enterWithoutLogin() {
+
+    this.navCtrl.setRoot(HomePage);
+    this.logged = false;
+    console.log("Logeatuta : ", this.logged);
+  }
   login() {
     this.auth.loginUser(this.user.email, this.user.password).then((user) => {
       let alert = this.alertCtrl.create({
@@ -49,8 +48,13 @@ export class LoginPage {
         buttons: ['Ados']
       });
       alert.present();
+
       this.navCtrl.setRoot(HomePage);
-      console.log("USER: " ,this.user.email);
+      console.log("USER: ", this.user.email);
+      if (this.auth.loggedmail == this.user.email) {
+        this.logged = true;
+        console.log("Logeatuta : ", this.logged);
+      }
     }
     )
       .catch(err => {
@@ -61,4 +65,8 @@ export class LoginPage {
         alert.present();
       })
   }
+
+
+
+
 }

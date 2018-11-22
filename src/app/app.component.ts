@@ -11,6 +11,7 @@ import { EventsPage } from '../pages/events/events';
 import { SettingsPage } from '../pages/settings/settings';
 import { Firebase } from '@ionic-native/firebase'
 import { TranslateService } from '@ngx-translate/core';
+import { LoginPage } from '../pages/login/login';
 
 
 @Component({
@@ -60,5 +61,8 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+  loginOpen() {
+    this.nav.push(LoginPage);
   }
 }

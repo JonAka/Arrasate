@@ -22,11 +22,14 @@ import { AuthProvider } from '../../providers/auth/auth';
 export class SettingsPage {
   public isToggled: boolean;
   logoutMsg = "Saioa itxi";
+  logeatuta: boolean;
 
   constructor(public auth: AuthProvider, public alertCtrl: AlertController, private storage: Storage, public translate: TranslateService, public navCtrl: NavController, public navParams: NavParams, public arrasateService: ArrasateService) {
     this.isToggled = false;
+   this.logeatuta = this.auth.logged;
+   console.log("logeatuta : " , this.logeatuta);
+
   }
-  
 
   logout() {
     this.auth.logout();
@@ -58,7 +61,7 @@ export class SettingsPage {
               title: "OK",
               subTitle: "Notifications enabled correctly",
               buttons: ["OK"],
-              
+
             });
             alert.present();
           } else {

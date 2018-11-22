@@ -20,7 +20,6 @@ export class ArrasateService {
 
   refreshLanguage() {
     this.storage.get('language').then((val) => {
-      console.log('language', val);
       if (val) {
         this.language = val;
       }
@@ -33,12 +32,10 @@ export class ArrasateService {
     });
     if (this.language == 'eu') {
       this.section = 'udala';
-      console.log("section:", this.section);
       return this.http.get('https://www.arrasate.eus/' + this.language + '/' + this.section, { headers: headers })
     }
     if (this.language == 'es') {
       this.section = 'ayuntamiento';
-      console.log("section:", this.section);
       return this.http.get('https://www.arrasate.eus/' + this.language + '/' + this.section, { headers: headers })
     }
   }

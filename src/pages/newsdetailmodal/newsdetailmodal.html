@@ -31,10 +31,10 @@
     </ion-card-content>
 
     <ion-fab button end padding [hidden]="favorite">
-      <button ion-fab (click)="saveNewsData()" *ngIf="!isFavorite">
+      <button ion-fab (click)="saveNewsData()" *ngIf="!isFavorite" [disabled]="!logeatuta">
         <ion-icon name="heart-outline"></ion-icon>
       </button>
-      <button ion-fab (click)="removeNewsData()" *ngIf="isFavorite">
+      <button ion-fab (click)="removeNewsData()" *ngIf="isFavorite" [disabled]="!logeatuta">
         <ion-icon name="heart"></ion-icon>
       </button>
     </ion-fab>

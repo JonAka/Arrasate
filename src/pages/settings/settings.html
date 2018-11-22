@@ -5,7 +5,7 @@
         </button>
     <ion-title> {{ "EZARPENAK" | translate }}</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="openStorage()">
+      <button ion-button (click)="openStorage()" [disabled]="!logeatuta">
         <ion-icon name="logo-buffer"></ion-icon>
       </button>
     </ion-buttons>
@@ -47,7 +47,7 @@
 
     <ion-item>
 
-      <button ion-button round (click)="logout()">
+      <button ion-button round (click)="logout()" [disabled]="!logeatuta">
         {{logoutMsg | translate}}
       </button>
     </ion-item>

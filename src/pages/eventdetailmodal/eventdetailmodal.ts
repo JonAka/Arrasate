@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import firebase from 'firebase';
 import { ArrasateService } from '../../providers/arrasate-service/arrasate-service';
 import { AngularFireDatabase } from 'angularfire2/database';
-
+import { AuthProvider } from '../../providers/auth/auth';
 
 /**
  * Generated class for the EventdetailmodalPage page.
@@ -25,17 +25,20 @@ export class EventdetailmodalPage {
   items: any = [];
   key: string = 'items';
   isFavorite: boolean = false;
-  user = firebase.auth().currentUser.uid;
+  logeatuta: boolean;
+  user;
   constructor(public arrasateService: ArrasateService,
     public navCtrl: NavController,
     public alertCtrl: AlertController,
     public navParams: NavParams,
     public http: HttpClient,
+    public auth: AuthProvider,
     public db: AngularFireDatabase) {
 
     this.getAgendaDetail(navParams.get('url'))
     this.getEventUrl = navParams.get('url');
     console.log("URL EVENT : ", this.getEventUrl);
+    this.logeatuta = this.auth.logged;
   }
 
   getAgendaDetail(item_id) {
@@ -52,7 +55,7 @@ export class EventdetailmodalPage {
     this.navCtrl.pop();
   }
   saveEventData() {
-
+    this.user = firebase.auth().currentUser.uid;
     if (this.user) {
 
       console.log(".", this.user);
@@ -68,7 +71,7 @@ export class EventdetailmodalPage {
     alert.present();
   }
   removeEventData() {
-
+    this.user = firebase.auth().currentUser.uid;
     const agend = this.db.object('/user/' + this.user + '/agenda');
     agend.remove();
     this.isFavorite = false;

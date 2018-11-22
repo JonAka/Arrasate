@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
-
+import { AuthProvider } from '../../providers/auth/auth';
 import firebase from 'firebase';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { ArrasateService } from '../../providers/arrasate-service/arrasate-service';
@@ -27,17 +27,21 @@ export class NewsdetailmodalPage {
   item;
   users;
   error;
+  user;
   url;
-  user = firebase.auth().currentUser.uid;
+  logeatuta: boolean;
+  
   constructor(
     public navCtrl: NavController,
     public alertCtrl: AlertController,
     public navParams: NavParams,
     public arrasateService: ArrasateService,
+    public auth: AuthProvider,
     public db: AngularFireDatabase
-    /*public http: HttpClient*/) {
+    ) {
 
     this.getAlbistedetail(navParams.get('url'));
+    this.logeatuta = this.auth.logged;
   }
   closeModal() {
     this.navCtrl.pop();
@@ -52,7 +56,7 @@ export class NewsdetailmodalPage {
     })
   }
   saveNewsData() {
-
+    this.user = firebase.auth().currentUser.uid;
     if (this.user) {
 
       console.log(".", this.user);
@@ -68,6 +72,7 @@ export class NewsdetailmodalPage {
     alert.present();
   }
   removeNewsData() {
+    this.user = firebase.auth().currentUser.uid;
     const albi = this.db.object('/user/' + this.user + '/albistea');
     albi.remove();
     this.isFavorite = false;

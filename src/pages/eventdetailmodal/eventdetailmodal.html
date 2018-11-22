@@ -26,10 +26,10 @@
     </ion-card-content>
 
     <ion-fab button end padding [hidden]="favorite">
-      <button ion-fab (click)="saveEventData()" *ngIf="!isFavorite">
+      <button ion-fab (click)="saveEventData()" *ngIf="!isFavorite" [disabled]="!logeatuta">
         <ion-icon name="heart-outline"></ion-icon>
       </button>
-      <button ion-fab (click)="removeEventData()" *ngIf="isFavorite">
+      <button ion-fab (click)="removeEventData()" *ngIf="isFavorite" [disabled]="!logeatuta">
         <ion-icon name="heart"></ion-icon>
       </button>
     </ion-fab>
