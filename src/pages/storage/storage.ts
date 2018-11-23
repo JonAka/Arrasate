@@ -23,7 +23,7 @@ export class StoragePage {
   agendaList;
   user = firebase.auth().currentUser.uid;
   test: Observable<any>;
-  newsitem;
+  newsitem = [];
   eventitem;
   constructor(public arrasateService: ArrasateService,
     public navCtrl: NavController,
@@ -48,9 +48,14 @@ export class StoragePage {
 
   getNewsItems() {
     // this.test = this.db.list('/user/' + this.user + '/albistea/url').valueChanges();
-    this.db.object('user/'+this.user+ '/albistea/url').valueChanges().subscribe(res => {
-      this.newsitem = res;
-      console.log("RES: ", this.newsitem);
+    this.db.object('user/'+this.user+ '/albistea/').valueChanges().subscribe(res => {
+
+      console.log("RES fsfsfsfsfsfsf: ", res);
+      for(let key of Object.keys(res)){
+           this.newsitem.push(res[key][0]) 
+          console.log("NEW item ", res[key][0] )
+          console.log("EGOERA: ", this.newsitem);
+      };
     });
 
 

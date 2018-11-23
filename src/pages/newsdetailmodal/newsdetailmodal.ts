@@ -4,6 +4,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import firebase from 'firebase';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { ArrasateService } from '../../providers/arrasate-service/arrasate-service';
+import { Observable } from 'rxjs';
 //import { HttpClient } from '@angular/common/http';
 
 /**
@@ -21,7 +22,7 @@ import { ArrasateService } from '../../providers/arrasate-service/arrasate-servi
 export class NewsdetailmodalPage {
 
   albisteDetail;
-  items: any[];
+  idkey;
   isFavorite: boolean = false;
   key: string = 'albisteItem';
   item;
@@ -30,7 +31,7 @@ export class NewsdetailmodalPage {
   user;
   url;
   logeatuta: boolean;
-  
+  albikey: Observable<any>;
   constructor(
     public navCtrl: NavController,
     public alertCtrl: AlertController,
@@ -38,7 +39,7 @@ export class NewsdetailmodalPage {
     public arrasateService: ArrasateService,
     public auth: AuthProvider,
     public db: AngularFireDatabase
-    ) {
+  ) {
 
     this.getAlbistedetail(navParams.get('url'));
     this.logeatuta = this.auth.logged;
@@ -57,12 +58,15 @@ export class NewsdetailmodalPage {
   }
   saveNewsData() {
     this.user = firebase.auth().currentUser.uid;
+    this.albikey = this.db.list('/user/' + this.user + '/albistea').snapshotChanges();
+    const itemRef = this.db.list('/user/' + this.user + '/albistea');
     if (this.user) {
-
       console.log(".", this.user);
-      const albi = this.db.object('/user/' + this.user + '/albistea');
-      albi.update({ url: [this.albisteDetail] });
-
+      itemRef.push([this.albisteDetail]).then(ref=>{
+        this.idkey = ref.key;
+        console.log("ref" , this.idkey);
+      });
+      
     }
     this.isFavorite = true;
     let alert = this.alertCtrl.create({
@@ -73,7 +77,7 @@ export class NewsdetailmodalPage {
   }
   removeNewsData() {
     this.user = firebase.auth().currentUser.uid;
-    const albi = this.db.object('/user/' + this.user + '/albistea');
+    const albi = this.db.object('/user/' + this.user + '/albistea/'+this.idkey);
     albi.remove();
     this.isFavorite = false;
   }

@@ -14,7 +14,7 @@
 
 
 <ion-content>
-<ul>
+  <ul>
     <li *ngFor="let item of test | async">
       {{ item.email }}
     </li>
@@ -34,16 +34,26 @@
   <div [ngSwitch]="type">
     <ion-list *ngSwitchCase="'albisteak'">
       <ion-item *ngFor="let item of newsitem" padding>
+        <ion-slides>
+          <ion-slide>
+            <div>
+              <img src="{{item.image.download}}" />
 
-        <img src="{{item.image.download}}" />
+              <h2 text-wrap>
+                {{item.title}}
+              </h2>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div>
+              <p [innerHtml]="item.text.data" text-wrap></p>
+            </div>
+          </ion-slide>
+        </ion-slides>
 
-        <h2 text-wrap>
-          {{item.title}}
-        </h2>
-
-        <button ion-button color="danger" (click)="removeNewsData(i)">
+        <button ion-button (click)="removeNewsData(i)">
           <ion-icon name="trash"></ion-icon>
-          Ezabatu
+          {{"Ezabatu" | translate}}
         </button>
       </ion-item>
 
@@ -54,15 +64,25 @@
   <div [ngSwitch]=" type">
     <ion-list *ngSwitchCase="'agenda'">
       <ion-item *ngFor="let item of eventitem">
+        <ion-slides>
+          <ion-slide>
+            <div>
+              <img src="{{item.image.download}}" />
 
-        <img src="{{item.image.download}}" />
-
-        <h2 text-wrap>
-          {{item.title}}
-        </h2>
-        <button ion-button color="danger" (click)="removeEventData(i)">
+              <h2 text-wrap>
+                {{item.title}}
+              </h2>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div>
+              <p [innerHtml]="item.text.data" text-wrap></p>
+            </div>
+          </ion-slide>
+        </ion-slides>
+        <button ion-button (click)="removeEventData(i)">
           <ion-icon name="trash"></ion-icon>
-          Ezabatu
+          {{"Ezabatu" | translate}}
         </button>
       </ion-item>
     </ion-list>

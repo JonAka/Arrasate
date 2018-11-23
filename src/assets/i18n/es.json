@@ -5,11 +5,12 @@
     "Ezarpenak": "Ajustes",
     "Notifikazioak": "Notificaciones",
     "Hizkuntza": "Idioma",
-    "Saioa hasi": "Cerrar sesion",
+    "Saioa itxi": "Cerrar sesion",
     "Sartu": "Entrar",
     "Erregistratu" : "Registrarse",
     "Emaila" : "Email",
     "Pasahitza" : "Contraseña",
+    "Ezabatu" : "Borrar",
     "Itxi": "Cerrar",
     "Ados, ulertuta!": "Bien, entendido !",
     "Ongi etorri udaleko app berri honetara": "Bienvenido a la nueva app del ayuntamiento",
@@ -21,5 +22,6 @@
     "SAIOA HASI" : "INICIAR SESION",
     "albisteak": "noticias",
     "udala" : "ayuntamiento",
-    "GUSTOKOENAK" : "FAVORITOS"
+    "GUSTOKOENAK" : "FAVORITOS",
+    "Saioa hasi gabe sartu" : "Entrar sin registrarse"
 }
