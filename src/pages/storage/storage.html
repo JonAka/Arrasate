@@ -34,23 +34,12 @@
   <div [ngSwitch]="type">
     <ion-list *ngSwitchCase="'albisteak'">
       <ion-item *ngFor="let item of newsitem" padding>
-        <ion-slides>
-          <ion-slide>
             <div>
               <img src="{{item.image.download}}" />
-
               <h2 text-wrap>
                 {{item.title}}
               </h2>
             </div>
-          </ion-slide>
-          <ion-slide>
-            <div>
-              <p [innerHtml]="item.text.data" text-wrap></p>
-            </div>
-          </ion-slide>
-        </ion-slides>
-
         <button ion-button (click)="removeNewsData(i)">
           <ion-icon name="trash"></ion-icon>
           {{"Ezabatu" | translate}}

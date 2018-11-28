@@ -24,7 +24,9 @@ export class StoragePage {
   user = firebase.auth().currentUser.uid;
   test: Observable<any>;
   newsitem = [];
+  toremove;
   eventitem;
+  key: string;
   constructor(public arrasateService: ArrasateService,
     public navCtrl: NavController,
     public alertCtrl: AlertController,
@@ -40,7 +42,7 @@ export class StoragePage {
 
   }
   getEventItems() {
-    this.db.object('user/'+this.user+ '/agenda/url').valueChanges().subscribe(res => {
+    this.db.object('user/' + this.user + '/agenda/url').valueChanges().subscribe(res => {
       this.eventitem = res;
       console.log("RES: ", this.eventitem);
     });
@@ -48,28 +50,30 @@ export class StoragePage {
 
   getNewsItems() {
     // this.test = this.db.list('/user/' + this.user + '/albistea/url').valueChanges();
-    this.db.object('user/'+this.user+ '/albistea/').valueChanges().subscribe(res => {
-
-      console.log("RES fsfsfsfsfsfsf: ", res);
-      for(let key of Object.keys(res)){
-           this.newsitem.push(res[key][0]) 
-          console.log("NEW item ", res[key][0] )
-          console.log("EGOERA: ", this.newsitem);
+    this.db.object('user/' + this.user + '/albistea/').valueChanges().subscribe(res => {
+      for (let key of Object.keys(res)) {
+        this.newsitem.push(res[key][0])
+        console.log("NEW key ", key)
+        console.log("EGOERA: ", this.newsitem);
+        this.key = key;
       };
-    });
 
+    });
 
   }
   removeNewsData() {
-    const albi = this.db.object('/user/' + this.user + '/albistea');
-      albi.remove();
-      let alert = this.alertCtrl.create({
-        subTitle: 'EZABATUTA !',
-        buttons: ['Ados']
-      });
-      alert.present();
-    
+    const removeitem = this.db.list('user/' + this.user + '/albistea/'+this.key)
+
+    removeitem.remove();
+
+    let alert = this.alertCtrl.create({
+      subTitle: 'EZABATUTA !',
+      buttons: ['Ados']
+    });
+    alert.present();
+  
   }
+
 
   removeEventData() {
     const agend = this.db.object('/user/' + this.user + '/agenda');
