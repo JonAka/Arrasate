@@ -26,8 +26,8 @@ export class SettingsPage {
 
   constructor(public auth: AuthProvider, public alertCtrl: AlertController, private storage: Storage, public translate: TranslateService, public navCtrl: NavController, public navParams: NavParams, public arrasateService: ArrasateService) {
     this.isToggled = false;
-   this.logeatuta = this.auth.logged;
-   console.log("logeatuta : " , this.logeatuta);
+    this.logeatuta = this.auth.logged;
+    console.log("logeatuta : ", this.logeatuta);
 
   }
 

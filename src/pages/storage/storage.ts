@@ -44,24 +44,25 @@ export class StoragePage {
   }
   getEventItems() {
     this.db.object('user/' + this.user + '/agenda/').valueChanges().subscribe(res => {
-      for (let agendkey of Object.keys(res)) {
-        this.eventitem.push(res[agendkey][0])
-        console.log("NEW key ", agendkey)
-        console.log("EGOERA: ", this.eventitem);
-        this.agendkey = agendkey;
-      };
+      if (res) {
+        for (let agendkey of Object.keys(res)) {
+          this.eventitem.push(res[agendkey][0])
+          this.agendkey = agendkey;
+        };
+      }
     });
+
   }
 
   getNewsItems() {
     // this.test = this.db.list('/user/' + this.user + '/albistea/url').valueChanges();
     this.db.object('user/' + this.user + '/albistea/').valueChanges().subscribe(res => {
-      for (let key of Object.keys(res)) {
-        this.newsitem.push(res[key][0])
-        console.log("NEW key ", key)
-        console.log("EGOERA: ", this.newsitem);
-        this.key = key;
-      };
+      if (res) {
+        for (let key of Object.keys(res)) {
+          this.newsitem.push(res[key][0])
+          this.key = key;
+        };
+      }
 
     });
 
