@@ -5,7 +5,7 @@ import firebase from 'firebase';
 import { ArrasateService } from '../../providers/arrasate-service/arrasate-service';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AuthProvider } from '../../providers/auth/auth';
-
+import { Observable } from 'rxjs';
 /**
  * Generated class for the EventdetailmodalPage page.
  *
@@ -22,11 +22,13 @@ export class EventdetailmodalPage {
 
   agendaDetail;
   getEventUrl: string;
+  agendaid;
   items: any = [];
   key: string = 'items';
   isFavorite: boolean = false;
   logeatuta: boolean;
   user;
+  agendakey: Observable<any>;
   constructor(public arrasateService: ArrasateService,
     public navCtrl: NavController,
     public alertCtrl: AlertController,
@@ -56,11 +58,14 @@ export class EventdetailmodalPage {
   }
   saveEventData() {
     this.user = firebase.auth().currentUser.uid;
+    this.agendakey = this.db.list('/user/' + this.user + '/agenda').snapshotChanges();
+    const itemRef = this.db.list('/user/' + this.user + '/agenda');
     if (this.user) {
-
       console.log(".", this.user);
-      const agend = this.db.object('/user/' + this.user + '/agenda');
-      agend.update({ url: [this.agendaDetail] });
+      itemRef.push([this.agendaDetail]).then(ref=>{
+        this.agendakey = ref.key;
+        console.log("ref" , this.agendakey);
+      });
 
     }
     this.isFavorite = true;
@@ -72,7 +77,7 @@ export class EventdetailmodalPage {
   }
   removeEventData() {
     this.user = firebase.auth().currentUser.uid;
-    const agend = this.db.object('/user/' + this.user + '/agenda');
+    const agend = this.db.object('/user/' + this.user + '/agenda/'+this.agendaid);
     agend.remove();
     this.isFavorite = false;
   }

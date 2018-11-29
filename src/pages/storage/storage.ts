@@ -25,8 +25,9 @@ export class StoragePage {
   test: Observable<any>;
   newsitem = [];
   toremove;
-  eventitem;
+  eventitem = [];
   key: string;
+  agendkey: string;
   constructor(public arrasateService: ArrasateService,
     public navCtrl: NavController,
     public alertCtrl: AlertController,
@@ -42,9 +43,13 @@ export class StoragePage {
 
   }
   getEventItems() {
-    this.db.object('user/' + this.user + '/agenda/url').valueChanges().subscribe(res => {
-      this.eventitem = res;
-      console.log("RES: ", this.eventitem);
+    this.db.object('user/' + this.user + '/agenda/').valueChanges().subscribe(res => {
+      for (let agendkey of Object.keys(res)) {
+        this.eventitem.push(res[agendkey][0])
+        console.log("NEW key ", agendkey)
+        console.log("EGOERA: ", this.eventitem);
+        this.agendkey = agendkey;
+      };
     });
   }
 
@@ -62,7 +67,7 @@ export class StoragePage {
 
   }
   removeNewsData() {
-    const removeitem = this.db.list('user/' + this.user + '/albistea/'+this.key)
+    const removeitem = this.db.list('user/' + this.user + '/albistea/' + this.key)
 
     removeitem.remove();
 
@@ -71,12 +76,12 @@ export class StoragePage {
       buttons: ['Ados']
     });
     alert.present();
-  
+
   }
 
 
   removeEventData() {
-    const agend = this.db.object('/user/' + this.user + '/agenda');
+    const agend = this.db.object('/user/' + this.user + '/agenda/' + this.agendkey);
     agend.remove();
     let alert = this.alertCtrl.create({
       subTitle: 'EZABATUTA !',
