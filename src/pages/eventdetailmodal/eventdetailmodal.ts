@@ -22,8 +22,6 @@ export class EventdetailmodalPage {
 
   agendaDetail;
   getEventUrl: string;
-  agendaid;
-  items: any = [];
   key: string = 'items';
   isFavorite: boolean = false;
   logeatuta: boolean;
@@ -56,15 +54,16 @@ export class EventdetailmodalPage {
   closeModal() {
     this.navCtrl.pop();
   }
+
   saveEventData() {
     this.user = firebase.auth().currentUser.uid;
     this.agendakey = this.db.list('/user/' + this.user + '/agenda').snapshotChanges();
     const itemRef = this.db.list('/user/' + this.user + '/agenda');
     if (this.user) {
       console.log(".", this.user);
-      itemRef.push([this.agendaDetail]).then(ref=>{
+      itemRef.push([this.agendaDetail]).then(ref => {
         this.agendakey = ref.key;
-        console.log("ref" , this.agendakey);
+        console.log("ref", this.agendakey);
       });
 
     }
@@ -75,9 +74,10 @@ export class EventdetailmodalPage {
     });
     alert.present();
   }
+
   removeEventData() {
     this.user = firebase.auth().currentUser.uid;
-    const agend = this.db.object('/user/' + this.user + '/agenda/'+this.agendaid);
+    const agend = this.db.object('/user/' + this.user + '/agenda/' + this.agendakey);
     agend.remove();
     this.isFavorite = false;
   }

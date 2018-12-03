@@ -13,7 +13,6 @@ import { Firebase } from '@ionic-native/firebase'
 import { TranslateService } from '@ngx-translate/core';
 import { LoginPage } from '../pages/login/login';
 
-
 @Component({
   templateUrl: 'app.html'
 })
@@ -23,8 +22,6 @@ export class MyApp {
 
   language = 'eu';
   lang;
- 
-
 
   rootPage: any = MainPage
 
@@ -43,7 +40,6 @@ export class MyApp {
     ];
 
     this.lang = translate.setDefaultLang(this.language);
-
   }
 
 

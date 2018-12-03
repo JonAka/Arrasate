@@ -54,6 +54,7 @@ export class ArrasateService {
       return this.http.get('https://www.arrasate.eus/' + this.language + '/' + this.section + '/@search?fullobjects=true&sort_order=reverse&sort_on=effective&b_size=25', { headers: headers })
     }
   }
+  
   getAgenda() {
 
     let headers = new HttpHeaders({
@@ -61,6 +62,7 @@ export class ArrasateService {
     });
     return this.http.get('https://www.arrasate.eus/' + this.language + '/agenda/@search?fullobjects=true&sort_order=reverse&sort_on=effective&b_size=25', { headers: headers })
   }
+
   getAlbisteDetail(item_url) {
     let headers = new HttpHeaders({
       'Accept': 'application/json',

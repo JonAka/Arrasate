@@ -62,11 +62,11 @@ export class NewsdetailmodalPage {
     const itemRef = this.db.list('/user/' + this.user + '/albistea');
     if (this.user) {
       console.log(".", this.user);
-      itemRef.push([this.albisteDetail]).then(ref=>{
+      itemRef.push([this.albisteDetail]).then(ref => {
         this.idkey = ref.key;
-        console.log("ref" , this.idkey);
+        console.log("ref", this.idkey);
       });
-      
+
     }
     this.isFavorite = true;
     let alert = this.alertCtrl.create({
@@ -77,7 +77,7 @@ export class NewsdetailmodalPage {
   }
   removeNewsData() {
     this.user = firebase.auth().currentUser.uid;
-    const albi = this.db.object('/user/' + this.user + '/albistea/'+this.idkey);
+    const albi = this.db.object('/user/' + this.user + '/albistea/' + this.idkey);
     albi.remove();
     this.isFavorite = false;
   }
