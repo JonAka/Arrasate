@@ -28,13 +28,14 @@ export class StoragePage {
   eventitem = [];
   key: string;
   agendkey: string;
-  constructor(public arrasateService: ArrasateService,
+
+  constructor(
+
+    public arrasateService: ArrasateService,
     public navCtrl: NavController,
     public alertCtrl: AlertController,
     public navParams: NavParams,
-    public db: AngularFireDatabase) {
-
-  }
+    public db: AngularFireDatabase) { }
 
   ionViewDidLoad() {
 
@@ -42,6 +43,8 @@ export class StoragePage {
     this.getNewsItems();
 
   }
+
+  /* Gustoko agendako albisteak bistaratzeko  */
   getEventItems() {
     this.db.object('user/' + this.user + '/agenda/').valueChanges().subscribe(res => {
       if (res) {
@@ -54,11 +57,11 @@ export class StoragePage {
     });
 
   }
-
+/* Gustoko albisteetako albisteak bistaratzeko  */
   getNewsItems() {
     this.db.object('user/' + this.user + '/albistea/').valueChanges().subscribe(res => {
       if (res) {
-        console.log("News res : ", res);
+        console.log("News res : ");
         for (let key of Object.keys(res)) {
           this.newsitem.push(res[key][0])
           this.key = key;
@@ -68,6 +71,7 @@ export class StoragePage {
     });
 
   }
+/* Gustoko albisteak ezabatzeko  */
   removeNewsData() {
     const removeitem = this.db.list('user/' + this.user + '/albistea/' + this.key)
 
@@ -77,11 +81,12 @@ export class StoragePage {
       subTitle: 'EZABATUTA !',
       buttons: ['Ados']
     });
+
     alert.present();
 
   }
 
-
+/* Gustoko agendako albisteak ezabatzeko  */
   removeEventData() {
     const agend = this.db.object('/user/' + this.user + '/agenda/' + this.agendkey);
     agend.remove();
@@ -90,5 +95,7 @@ export class StoragePage {
       buttons: ['Ados']
     });
     alert.present();
+
   }
+
 }

@@ -28,6 +28,7 @@ export class MyApp {
   pages: Array<{ icon: string, title: string, component: any, }>;
 
   constructor(public platform: Platform, public firebase: Firebase, translate: TranslateService, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+
     this.initializeApp();
 
     // used for an example of ngFor and navigation
