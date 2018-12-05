@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, NgZone } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -12,6 +12,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import { Firebase } from '@ionic-native/firebase'
 import { TranslateService } from '@ngx-translate/core';
 import { LoginPage } from '../pages/login/login';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   templateUrl: 'app.html'
@@ -27,7 +28,13 @@ export class MyApp {
 
   pages: Array<{ icon: string, title: string, component: any, }>;
 
-  constructor(public platform: Platform, public firebase: Firebase, translate: TranslateService, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform,
+    public firebase: Firebase,
+    translate: TranslateService,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    public afAuth: AngularFireAuth,
+    private _ngZone: NgZone) {
 
     this.initializeApp();
 
@@ -48,6 +55,7 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      this.loginOpen();
 
       this.statusBar.styleDefault();
       this.splashScreen.hide();
@@ -61,6 +69,18 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
   loginOpen() {
-    this.nav.push(LoginPage);
+    this.afAuth.auth.onAuthStateChanged(user => {
+      if (user) {
+        console.log("I AM LOGGED: ", user)
+        // this.checkTopicListUpdate();
+        this._ngZone.runGuarded(() => {
+          this.rootPage = HomePage
+        })
+      } else {
+        console.log("NOT USER")
+        this.nav.push(LoginPage);
+      }
+    });
   }
 }
+

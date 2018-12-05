@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
-import { LoginPage } from '../login/login';
 import { Storage } from '@ionic/storage';
 import { StoragePage } from '../../pages/storage/storage';
 
 import { TranslateService } from '@ngx-translate/core';
 import { ArrasateService } from '../../providers/arrasate-service/arrasate-service';
 import { AuthProvider } from '../../providers/auth/auth';
+import { AngularFireAuth } from 'angularfire2/auth';
 /**
  * Generated class for the SettingsPage page.
  *
@@ -24,16 +24,29 @@ export class SettingsPage {
   logoutMsg = "Saioa itxi";
   logeatuta: boolean;
 
-  constructor(public auth: AuthProvider, public alertCtrl: AlertController, private storage: Storage, public translate: TranslateService, public navCtrl: NavController, public navParams: NavParams, public arrasateService: ArrasateService) {
+  constructor(public auth: AuthProvider,
+    public alertCtrl: AlertController,
+    private storage: Storage,
+    public translate: TranslateService,
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public afAuth: AngularFireAuth,
+    public arrasateService: ArrasateService, ) {
     this.isToggled = false;
     this.logeatuta = this.auth.logged;
-    console.log("logeatuta : ", this.logeatuta);
 
+    this.afAuth.auth.onAuthStateChanged(user => {
+      if (user) {
+        this.logeatuta = true;
+      } else {
+        this.logeatuta = false;
+      }
+    }); 
+    console.log("logeatuta : ", this.afAuth.auth.currentUser);
   }
 
   logout() {
     this.auth.logout();
-    this.navCtrl.push(LoginPage);
     let alert = this.alertCtrl.create({
       subTitle: "Saioa itxi duzu!",
       buttons: ["ados"]

@@ -6,6 +6,7 @@ import { ArrasateService } from '../../providers/arrasate-service/arrasate-servi
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AuthProvider } from '../../providers/auth/auth';
 import { Observable } from 'rxjs';
+import { AngularFireAuth } from 'angularfire2/auth';
 /**
  * Generated class for the EventdetailmodalPage page.
  *
@@ -33,12 +34,19 @@ export class EventdetailmodalPage {
     public navParams: NavParams,
     public http: HttpClient,
     public auth: AuthProvider,
-    public db: AngularFireDatabase) {
+    public db: AngularFireDatabase,
+    public afAuth: AngularFireAuth,) {
 
     this.getAgendaDetail(navParams.get('url'))
     this.getEventUrl = navParams.get('url');
     console.log("URL EVENT : ", this.getEventUrl);
-    this.logeatuta = this.auth.logged;
+    this.afAuth.auth.onAuthStateChanged(user => {
+      if (user) {
+        this.logeatuta = true;
+      } else {
+        this.logeatuta = false;
+      }
+    });
   }
 
   getAgendaDetail(item_id) {

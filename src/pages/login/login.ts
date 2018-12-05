@@ -53,7 +53,6 @@ export class LoginPage {
       console.log("USER: ", this.user.email);
       if (this.auth.loggedmail == this.user.email) {
         this.logged = true;
-        console.log("Logeatuta : ", this.logged);
       }
     }
     )

@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { ArrasateService } from '../../providers/arrasate-service/arrasate-service';
 import { Observable } from 'rxjs';
+import { AngularFireAuth } from 'angularfire2/auth';
 //import { HttpClient } from '@angular/common/http';
 
 /**
@@ -30,6 +31,7 @@ export class NewsdetailmodalPage {
   error;
   user;
   url;
+  uid;
   logeatuta: boolean;
   albikey: Observable<any>;
   constructor(
@@ -38,11 +40,19 @@ export class NewsdetailmodalPage {
     public navParams: NavParams,
     public arrasateService: ArrasateService,
     public auth: AuthProvider,
-    public db: AngularFireDatabase
+    public db: AngularFireDatabase,
+    public afAuth: AngularFireAuth,
   ) {
+    this.afAuth.auth.onAuthStateChanged(user => {
+      if (user) {
+        this.logeatuta = true;
+      } else {
+        this.logeatuta = false;
+      }
+    });
 
     this.getAlbistedetail(navParams.get('url'));
-    this.logeatuta = this.auth.logged;
+    
   }
   closeModal() {
     this.navCtrl.pop();
@@ -58,14 +68,16 @@ export class NewsdetailmodalPage {
   }
   saveNewsData() {
     this.user = firebase.auth().currentUser.uid;
-    this.albikey = this.db.list('/user/' + this.user + '/albistea').snapshotChanges();
+    this.albikey = this.db.object('/user/' + this.user + '/albistea').valueChanges();
     const itemRef = this.db.list('/user/' + this.user + '/albistea');
+
     if (this.user) {
       console.log(".", this.user);
       itemRef.push([this.albisteDetail]).then(ref => {
         this.idkey = ref.key;
         console.log("ref", this.idkey);
       });
+
 
     }
     this.isFavorite = true;

@@ -49,7 +49,10 @@ export class AuthProvider {
 
   // Devuelve la session
   get Session() {
+    
     return this.afAuth.authState;
+    
   }
 }
+
 

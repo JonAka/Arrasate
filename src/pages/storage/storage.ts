@@ -57,7 +57,7 @@ export class StoragePage {
     });
 
   }
-/* Gustoko albisteetako albisteak bistaratzeko  */
+  /* Gustoko albisteetako albisteak bistaratzeko  */
   getNewsItems() {
     this.db.object('user/' + this.user + '/albistea/').valueChanges().subscribe(res => {
       if (res) {
@@ -65,16 +65,17 @@ export class StoragePage {
         for (let key of Object.keys(res)) {
           this.newsitem.push(res[key][0])
           this.key = key;
+          console.log("Ref : ", this.key);
         };
       }
 
     });
 
   }
-/* Gustoko albisteak ezabatzeko  */
+  /* Gustoko albisteak ezabatzeko  */
   removeNewsData() {
+    console.log("REF EZABATU: ", this.key);
     const removeitem = this.db.list('user/' + this.user + '/albistea/' + this.key)
-
     removeitem.remove();
 
     let alert = this.alertCtrl.create({
@@ -86,7 +87,7 @@ export class StoragePage {
 
   }
 
-/* Gustoko agendako albisteak ezabatzeko  */
+  /* Gustoko agendako albisteak ezabatzeko  */
   removeEventData() {
     const agend = this.db.object('/user/' + this.user + '/agenda/' + this.agendkey);
     agend.remove();
@@ -97,5 +98,6 @@ export class StoragePage {
     alert.present();
 
   }
+
 
 }
