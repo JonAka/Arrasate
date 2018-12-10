@@ -77,7 +77,7 @@ export class EventdetailmodalPage {
     }
     this.isFavorite = true;
     let alert = this.alertCtrl.create({
-      subTitle: 'GUSTOKOENETARA GEHITUTA !',
+      subTitle: 'GUSTOKOENETARA GEHITUTA!',
       buttons: ['Ados']
     });
     alert.present();

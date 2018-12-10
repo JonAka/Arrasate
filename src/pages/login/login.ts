@@ -38,8 +38,6 @@ export class LoginPage {
   enterWithoutLogin() {
 
     this.navCtrl.setRoot(HomePage);
-    this.logged = false;
-    console.log("Logeatuta : ", this.logged);
   }
   login() {
     this.auth.loginUser(this.user.email, this.user.password).then((user) => {

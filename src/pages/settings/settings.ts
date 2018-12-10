@@ -34,6 +34,7 @@ export class SettingsPage {
     public arrasateService: ArrasateService, ) {
     this.isToggled = false;
     this.logeatuta = this.auth.logged;
+    
 
     this.afAuth.auth.onAuthStateChanged(user => {
       if (user) {

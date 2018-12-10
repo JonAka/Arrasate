@@ -91,6 +91,7 @@ export class StoragePage {
   removeEventData() {
     const agend = this.db.object('/user/' + this.user + '/agenda/' + this.agendkey);
     agend.remove();
+    
     let alert = this.alertCtrl.create({
       subTitle: 'EZABATUTA !',
       buttons: ['Ados']

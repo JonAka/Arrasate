@@ -48,6 +48,7 @@ export class MyApp {
     ];
 
     this.lang = translate.setDefaultLang(this.language);
+
   }
 
 
