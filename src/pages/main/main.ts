@@ -20,6 +20,7 @@ export class MainPage {
   skipMsg: string = "Itxi";
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    
   }
 
   skip() {
