@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController,ToastController} from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import firebase from 'firebase';
 import { ArrasateService } from '../../providers/arrasate-service/arrasate-service';
@@ -7,6 +7,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { AuthProvider } from '../../providers/auth/auth';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from 'angularfire2/auth';
+
 /**
  * Generated class for the EventdetailmodalPage page.
  *
@@ -35,7 +36,8 @@ export class EventdetailmodalPage {
     public http: HttpClient,
     public auth: AuthProvider,
     public db: AngularFireDatabase,
-    public afAuth: AngularFireAuth,) {
+    public afAuth: AngularFireAuth,
+    public toastCtrl: ToastController) {
 
     this.getAgendaDetail(navParams.get('url'))
     this.getEventUrl = navParams.get('url');
@@ -76,11 +78,11 @@ export class EventdetailmodalPage {
 
     }
     this.isFavorite = true;
-    let alert = this.alertCtrl.create({
-      subTitle: 'GUSTOKOENETARA GEHITUTA!',
-      buttons: ['Ados']
+    const toast = this.toastCtrl.create({
+      message: 'Gustokoenetara gehituta  !',
+      duration: 3200
     });
-    alert.present();
+    toast.present();
   }
 
   removeEventData() {

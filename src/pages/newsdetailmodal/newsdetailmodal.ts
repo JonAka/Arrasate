@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import firebase from 'firebase';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -42,6 +42,7 @@ export class NewsdetailmodalPage {
     public auth: AuthProvider,
     public db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
+    public toastCtrl: ToastController
   ) {
     this.afAuth.auth.onAuthStateChanged(user => {
       if (user) {
@@ -52,7 +53,7 @@ export class NewsdetailmodalPage {
     });
 
     this.getAlbistedetail(navParams.get('url'));
-    
+
   }
   closeModal() {
     this.navCtrl.pop();
@@ -81,11 +82,12 @@ export class NewsdetailmodalPage {
 
     }
     this.isFavorite = true;
-    let alert = this.alertCtrl.create({
-      subTitle: 'GUSTOKOENETARA GEHITUTA !',
-      buttons: ['Ados']
+    this.isFavorite = true;
+    const toast = this.toastCtrl.create({
+      message: 'Gustokoenetara gehituta  !',
+      duration: 3200
     });
-    alert.present();
+    toast.present();
   }
   removeNewsData() {
     this.user = firebase.auth().currentUser.uid;
