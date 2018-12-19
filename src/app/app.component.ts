@@ -13,6 +13,8 @@ import { Firebase } from '@ionic-native/firebase'
 import { TranslateService } from '@ngx-translate/core';
 import { LoginPage } from '../pages/login/login';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Storage } from '@ionic/storage';
+import { ArrasateService } from '../providers/arrasate-service/arrasate-service';
 
 @Component({
   templateUrl: 'app.html'
@@ -21,20 +23,20 @@ export class MyApp {
 
   @ViewChild(Nav) nav: Nav;
 
-  language = 'eu';
-  lang;
-
-  rootPage: any = MainPage
-
+  rootPage: any = MainPage;
+  language: any = "eu";
   pages: Array<{ icon: string, title: string, component: any, }>;
+  toastCtrl: any;
 
   constructor(public platform: Platform,
     public firebase: Firebase,
-    translate: TranslateService,
+    public translate: TranslateService,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     public afAuth: AngularFireAuth,
-    private _ngZone: NgZone) {
+    private _ngZone: NgZone,
+    public storage: Storage,
+    public arrasateService: ArrasateService) {
 
     this.initializeApp();
 
@@ -47,19 +49,42 @@ export class MyApp {
       { icon: 'options', title: 'Ezarpenak', component: SettingsPage }
     ];
 
-    this.lang = translate.setDefaultLang(this.language);
+    this.storage.get('language').then((lang) => {
+      if (lang) {
+        console.log("LANG:", lang);
+        this.language = lang;
+        console.log("Stored Language:", this.language);
+        translate.setDefaultLang(this.language);
+      } else {
+        this.language = "eu";
+        console.log("Stored Language:", this.language);
+        translate.setDefaultLang(this.language);
+      }
+
+    });
+
   }
 
 
   initializeApp() {
+
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.loginOpen();
 
+      this.storage.get('mainShow').then((result) => {
+
+        if (result) {
+          this.loginOpen();
+        }
+        else {
+          this.rootPage = MainPage;
+          this.storage.set('mainShow', true);
+        }
+      })
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      
+
 
     });
   }

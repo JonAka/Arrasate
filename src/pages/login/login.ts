@@ -39,6 +39,7 @@ export class LoginPage {
 
     this.navCtrl.setRoot(HomePage);
   }
+
   login() {
     this.auth.loginUser(this.user.email, this.user.password).then((user) => {
       let alert = this.alertCtrl.create({

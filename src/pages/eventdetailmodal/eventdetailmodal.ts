@@ -7,6 +7,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { AuthProvider } from '../../providers/auth/auth';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the EventdetailmodalPage page.
@@ -37,7 +38,8 @@ export class EventdetailmodalPage {
     public auth: AuthProvider,
     public db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
-    public toastCtrl: ToastController) {
+    public toastCtrl: ToastController,
+    public storage: Storage) {
 
     this.getAgendaDetail(navParams.get('url'))
     this.getEventUrl = navParams.get('url');
@@ -78,6 +80,9 @@ export class EventdetailmodalPage {
 
     }
     this.isFavorite = true;
+    
+
+    
     const toast = this.toastCtrl.create({
       message: 'Gustokoenetara gehituta  !',
       duration: 3200
@@ -90,6 +95,7 @@ export class EventdetailmodalPage {
     const agend = this.db.object('/user/' + this.user + '/agenda/' + this.agendakey);
     agend.remove();
     this.isFavorite = false;
+   
   }
 }
 
