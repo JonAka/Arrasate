@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController,ToastController} from 'ionic-angular';
+import { NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import firebase from 'firebase';
 import { ArrasateService } from '../../providers/arrasate-service/arrasate-service';
@@ -76,13 +76,16 @@ export class EventdetailmodalPage {
       itemRef.push([this.agendaDetail]).then(ref => {
         this.agendakey = ref.key;
         console.log("ref", this.agendakey);
+        this.storage.set('Agenda Detail', this.agendakey);
+
       });
+
 
     }
     this.isFavorite = true;
-    
 
-    
+
+
     const toast = this.toastCtrl.create({
       message: 'Gustokoenetara gehituta  !',
       duration: 3200
@@ -95,7 +98,7 @@ export class EventdetailmodalPage {
     const agend = this.db.object('/user/' + this.user + '/agenda/' + this.agendakey);
     agend.remove();
     this.isFavorite = false;
-   
+
   }
 }
 

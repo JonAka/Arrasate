@@ -96,6 +96,7 @@ export class StoragePage {
       subTitle: 'EZABATUTA !',
       buttons: ['Ados']
     });
+    this.navCtrl.pop();
     alert.present();
 
   }

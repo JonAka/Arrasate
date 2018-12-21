@@ -12,7 +12,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
- */
+ **/
 
 
 @Component({
@@ -23,6 +23,7 @@ export class SettingsPage {
   public isToggled: boolean;
   logoutMsg = "Saioa itxi";
   logeatuta: boolean;
+  izena: any;
 
   constructor(public auth: AuthProvider,
     public alertCtrl: AlertController,
@@ -44,6 +45,7 @@ export class SettingsPage {
       }
     }); 
     console.log("logeatuta : ", this.afAuth.auth.currentUser);
+    this.getStoredName();
   }
 
   logout() {
@@ -52,6 +54,7 @@ export class SettingsPage {
       subTitle: "Saioa itxi duzu!",
       buttons: ["ados"]
     });
+    this.storage.remove('Izena');
     alert.present();
   }
   openStorage() {
@@ -61,5 +64,13 @@ export class SettingsPage {
   onSelectChange(selectedValue: any) {
     this.translate.setDefaultLang(selectedValue);
     this.storage.set('language', selectedValue);
+  }
+  getStoredName(){
+
+    this.storage.get('Izena').then(name => {
+
+      this.izena = name;
+      console.log(this.izena);
+    });
   }
 }

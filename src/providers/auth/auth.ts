@@ -10,7 +10,7 @@ export class AuthProvider {
   items: any;
   user;
   loggedmail;
-  logged:boolean = false;
+  logged: boolean = false;
   constructor(private afAuth: AngularFireAuth, public afDb: AngularFireDatabase) {
 
   }
@@ -32,11 +32,13 @@ export class AuthProvider {
   // Login de usuario
   loginUser(email: string, password: string) {
     return firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(user => {Promise.resolve(user)
-      console.log("user" , user.user.email);
-      this.loggedmail = user.user.email;
-      this.logged =true;})
-      
+      .then(user => {
+        Promise.resolve(user)
+        console.log("user", user.user.email);
+        this.loggedmail = user.user.email;
+        this.logged = true;
+      })
+
       .catch(err => Promise.reject(err))
   }
 
@@ -44,14 +46,13 @@ export class AuthProvider {
   logout() {
     this.logged = false;
     return firebase.auth().signOut();
-    
   }
 
   // Devuelve la session
   get Session() {
-    
+
     return this.afAuth.authState;
-    
+
   }
 }
 

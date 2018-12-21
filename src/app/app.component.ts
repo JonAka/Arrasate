@@ -15,6 +15,7 @@ import { LoginPage } from '../pages/login/login';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Storage } from '@ionic/storage';
 import { ArrasateService } from '../providers/arrasate-service/arrasate-service';
+import { StoragePage } from '../pages/storage/storage';
 
 @Component({
   templateUrl: 'app.html'
@@ -23,8 +24,9 @@ export class MyApp {
 
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = MainPage;
+  rootPage: any = "";
   language: any = "eu";
+  izena: any;
   pages: Array<{ icon: string, title: string, component: any, }>;
   toastCtrl: any;
 
@@ -72,14 +74,14 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
 
-      this.storage.get('mainShow').then((result) => {
+      this.storage.get('Result').then((result) => {
 
         if (result) {
           this.loginOpen();
         }
         else {
           this.rootPage = MainPage;
-          this.storage.set('mainShow', true);
+          this.storage.set('Result', true);
         }
       })
       this.statusBar.styleDefault();
@@ -88,19 +90,23 @@ export class MyApp {
 
     });
   }
+  pushStorage() {
+    this.nav.push(StoragePage);
+  }
 
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
+
   loginOpen() {
     this.afAuth.auth.onAuthStateChanged(user => {
       if (user) {
         console.log("I AM LOGGED: ", user)
         // this.checkTopicListUpdate();
         this._ngZone.runGuarded(() => {
-          this.rootPage = HomePage
+          this.rootPage = HomePage;
         })
       } else {
         console.log("NOT USER")
