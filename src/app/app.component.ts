@@ -1,5 +1,5 @@
 import { Component, ViewChild, NgZone } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform,AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -36,6 +36,7 @@ export class MyApp {
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     public afAuth: AngularFireAuth,
+    public alertCtrl: AlertController,
     private _ngZone: NgZone,
     public storage: Storage,
     public arrasateService: ArrasateService) {
@@ -99,7 +100,34 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
-
+  
+  showPrompt() {
+    const prompt = this.alertCtrl.create({
+      title: 'Logeatu',
+      message: "Sartu zure izena gordetzeko",
+      inputs: [
+        {
+          name: 'Izena',
+          placeholder: 'Izena'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Itxi',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Gorde',
+          handler: data => {
+            this.storage.set('Izena', data.Izena);
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
   loginOpen() {
     this.afAuth.auth.onAuthStateChanged(user => {
       if (user) {
@@ -107,6 +135,8 @@ export class MyApp {
         // this.checkTopicListUpdate();
         this._ngZone.runGuarded(() => {
           this.rootPage = HomePage;
+          this.showPrompt();
+
         })
       } else {
         console.log("NOT USER")

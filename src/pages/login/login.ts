@@ -20,8 +20,8 @@ export class LoginPage {
 
   signin() {
     this.auth.registerUser(this.user.email, this.user.password)
-      
-    .then((user) => {
+
+      .then((user) => {
         // El usuario se ha creado correctamente
         let alert = this.alertCtrl.create({
           subTitle: 'ERABILTZAILEA ERREGISTRATUA',
@@ -34,20 +34,17 @@ export class LoginPage {
           subTitle: 'Ez duzu emaila/pasahitza formatu zuzenean sartu edo emaila erregistratua dago',
           buttons: ['Ados']
         });
-        
+
         alert.present();
       })
 
   }
   enterWithoutLogin() {
-
     this.navCtrl.setRoot(HomePage);
   }
 
   login() {
     this.auth.loginUser(this.user.email, this.user.password).then((user) => {
-      
-      this.showPrompt();
 
       this.navCtrl.setRoot(HomePage);
       console.log("USER: ", this.user.email);
@@ -64,7 +61,7 @@ export class LoginPage {
         alert.present();
       })
   }
-showPrompt() {
+  showPrompt() {
     const prompt = this.alertCtrl.create({
       title: 'Logeatu',
       message: "Sartu zure izena gordetzeko",
@@ -85,7 +82,6 @@ showPrompt() {
           text: 'Gorde',
           handler: data => {
             this.storage.set('Izena', data.Izena);
-            console.log('Saved clicked',data.Izena);
           }
         }
       ]
