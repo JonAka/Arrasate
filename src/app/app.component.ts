@@ -140,6 +140,7 @@ export class MyApp {
         this._ngZone.runGuarded(() => {
           this.rootPage = HomePage;
           if (!this.izena) { this.showPrompt(); }
+
         })
       } else {
         console.log("NOT USER")
