@@ -1,5 +1,5 @@
 import { Component, ViewChild, NgZone } from '@angular/core';
-import { Nav, Platform,AlertController } from 'ionic-angular';
+import { Nav, Platform, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -100,7 +100,7 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
-  
+
   showPrompt() {
     const prompt = this.alertCtrl.create({
       title: 'Logeatu',
@@ -128,15 +128,18 @@ export class MyApp {
     });
     prompt.present();
   }
+
   loginOpen() {
+    this.storage.get('Izena').then(res => {
+      this.izena = res;
+    });
     this.afAuth.auth.onAuthStateChanged(user => {
       if (user) {
         console.log("I AM LOGGED: ", user)
         // this.checkTopicListUpdate();
         this._ngZone.runGuarded(() => {
           this.rootPage = HomePage;
-          this.showPrompt();
-
+          if (!this.izena) { this.showPrompt(); }
         })
       } else {
         console.log("NOT USER")

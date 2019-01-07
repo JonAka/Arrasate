@@ -48,10 +48,11 @@ export class StoragePage {
   getEventItems() {
     this.db.object('user/' + this.user + '/agenda/').valueChanges().subscribe(res => {
       if (res) {
-        console.log("Event res : ", res);
+        
         for (let agendkey of Object.keys(res)) {
           this.eventitem.push(res[agendkey][0])
           this.agendkey = agendkey;
+          console.log("Event res : ", res);
         };
       }
     });
@@ -61,7 +62,6 @@ export class StoragePage {
   getNewsItems() {
     this.db.object('user/' + this.user + '/albistea/').valueChanges().subscribe(res => {
       if (res) {
-        console.log("News res : ");
         for (let key of Object.keys(res)) {
           this.newsitem.push(res[key][0])
           this.key = key;
@@ -82,16 +82,16 @@ export class StoragePage {
       subTitle: 'EZABATUTA !',
       buttons: ['Ados']
     });
-
+    this.navCtrl.pop();
     alert.present();
 
   }
 
-  /* Gustoko agendako albisteak ezabatzeko  */
+  /* Gustoko agendako albisteak ezabatzeko */
   removeEventData() {
     const agend = this.db.object('/user/' + this.user + '/agenda/' + this.agendkey);
     agend.remove();
-    
+
     let alert = this.alertCtrl.create({
       subTitle: 'EZABATUTA !',
       buttons: ['Ados']

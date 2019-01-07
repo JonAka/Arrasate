@@ -19,6 +19,7 @@ export class LoginPage {
   }
 
   signin() {
+
     this.auth.registerUser(this.user.email, this.user.password)
 
       .then((user) => {
@@ -39,6 +40,7 @@ export class LoginPage {
       })
 
   }
+
   enterWithoutLogin() {
     this.navCtrl.setRoot(HomePage);
   }
@@ -49,6 +51,7 @@ export class LoginPage {
       this.navCtrl.setRoot(HomePage);
       console.log("USER: ", this.user.email);
       if (this.auth.loggedmail == this.user.email) {
+        this.showPrompt();
         this.logged = true;
       }
     }
@@ -61,6 +64,7 @@ export class LoginPage {
         alert.present();
       })
   }
+
   showPrompt() {
     const prompt = this.alertCtrl.create({
       title: 'Logeatu',
