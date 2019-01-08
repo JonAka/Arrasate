@@ -29,8 +29,6 @@ export class ArrasateService {
       }else{
         this.language = "eu"
       }
-      console.log("MY LANG VAL: ", val)
-
     });
     
     if (this.language == 'eu') {

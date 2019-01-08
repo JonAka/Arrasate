@@ -52,7 +52,7 @@ export class StoragePage {
         for (let agendkey of Object.keys(res)) {
           this.eventitem.push(res[agendkey][0])
           this.agendkey = agendkey;
-          console.log("Event res : ", res);
+          console.log("Event res : ", this.agendkey);
         };
       }
     });
@@ -96,6 +96,7 @@ export class StoragePage {
       subTitle: 'EZABATUTA !',
       buttons: ['Ados']
     });
+    console.log("AGENDA KEY : " , this.agendkey);
     this.navCtrl.pop();
     alert.present();
 

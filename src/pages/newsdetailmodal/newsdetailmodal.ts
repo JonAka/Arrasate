@@ -70,6 +70,7 @@ export class NewsdetailmodalPage {
   saveNewsData() {
     this.user = firebase.auth().currentUser.uid;
     this.albikey = this.db.object('/user/' + this.user + '/albistea').valueChanges();
+    this.albikey = this.db.object('/user/' + this.user + '/albistea').snapshotChanges();
     const itemRef = this.db.list('/user/' + this.user + '/albistea');
 
     if (this.user) {

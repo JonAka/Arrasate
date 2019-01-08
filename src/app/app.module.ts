@@ -17,6 +17,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import { TabsPage } from '../pages/tabs/tabs';
 import { MainPage } from '../pages/main/main';
 import { StoragePage } from '../pages/storage/storage';
+import { FavdetailPage } from '../pages/favdetail/favdetail';
 import { Dialogs } from '@ionic-native/dialogs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -58,7 +59,8 @@ export function createTranslateLoader(http: HttpClient) {
     SettingsPage,
     TabsPage,
     MainPage,
-    StoragePage
+    StoragePage,
+    FavdetailPage
 
   ],
   imports: [
@@ -94,6 +96,7 @@ export function createTranslateLoader(http: HttpClient) {
     TabsPage,
     MainPage,
     StoragePage,
+    FavdetailPage
 
 
   ],
