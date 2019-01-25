@@ -8,7 +8,7 @@ import { Firebase } from "@ionic-native/firebase";
 
 export class ArrasateService {
 
-  language ="eu";
+  language = "eu";
   section;
   lang;
 
@@ -22,15 +22,15 @@ export class ArrasateService {
     let headers = new HttpHeaders({
       'Accept': 'application/json',
     });
-    
+
     this.storage.get('language').then((val) => {
-      if(val){
+      if (val) {
         this.language = val;
-      }else{
+      } else {
         this.language = "eu"
       }
     });
-    
+
     if (this.language == 'eu') {
       this.section = 'udala';
       return this.http.get('https://www.arrasate.eus/' + this.language + '/' + this.section, { headers: headers })
@@ -55,9 +55,8 @@ export class ArrasateService {
       return this.http.get('https://www.arrasate.eus/' + this.language + '/' + this.section + '/@search?fullobjects=true&sort_order=reverse&sort_on=effective&b_size=30', { headers: headers })
     }
   }
-  
-  getAgenda() {
 
+  getAgenda() {
     let headers = new HttpHeaders({
       'Accept': 'application/json',
     });

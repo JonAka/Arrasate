@@ -34,7 +34,7 @@
 
   <div [ngSwitch]="type">
     <ion-list *ngSwitchCase="'albisteak'">
-      <ion-item *ngFor="let item of newsitem">
+      <ion-item *ngFor="let item of newsitem" (click)="openNewsModal(item['@id'])">
         <div>
           <img src="{{item.image.download}}" />
           <h2 text-wrap>

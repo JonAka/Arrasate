@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
+
 import { ArrasateService } from '../../providers/arrasate-service/arrasate-service';
+import { NewsdetailmodalPage } from '../newsdetailmodal/newsdetailmodal';
+
 import { AngularFireDatabase } from 'angularfire2/database';
 import firebase from 'firebase';
 import { Observable } from 'rxjs';
+
 /**
  * Generated class for the StoragePage page.
  *
@@ -35,7 +39,8 @@ export class StoragePage {
     public navCtrl: NavController,
     public alertCtrl: AlertController,
     public navParams: NavParams,
-    public db: AngularFireDatabase) { }
+    public db: AngularFireDatabase,
+    private modalController: ModalController) { }
 
   ionViewDidLoad() {
 
@@ -101,6 +106,10 @@ export class StoragePage {
     alert.present();
 
   }
-
+  openNewsModal(item_url) {
+    console.log("ITEM: ", item_url);
+    let openNewsModal = this.modalController.create(NewsdetailmodalPage, { url: item_url });
+    openNewsModal.present();
+  }
 
 }
