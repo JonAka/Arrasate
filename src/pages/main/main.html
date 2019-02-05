@@ -1,34 +1,34 @@
 <ion-content>
   <ion-slides pager (ionSlideDidChange)="slideChanged()">
-      <ion-slide>
-          <div class="img">
-            <ion-img img  src="../../assets/icon/favicon.ico" width="150px" height="250px"></ion-img>
-          </div>
-          <div>
-            <h2>ARRASATE APP</h2>
-            <p>{{"Ongi etorri udaleko app berri honetara" | translate}}</p>
-          </div>
-        </ion-slide>
-    
-        <ion-slide>
-          <div class="diag">
-            <ion-icon name="paper" color="primary"></ion-icon>
-          </div>
-          <div>
-            <h2>{{"Albiste zein agenda irakurri" | translate}}</h2>
-            <p>Nahi dituzun albisteak irakurtzeko eta agendan burutzear dauden egitarau desberdinak irakurtzeko aukera</p>
-          </div>
-        </ion-slide>
-    
-        <ion-slide>
-          <div class="diag">
-            <ion-icon name="body" color="primary"></ion-icon>
-          </div>
-          <div>
-            <h2>Saioa hasteko erregistratzeko aukera</h2>
-            <p>Erregistratu zaitez gurekin ! Albiste zein agendako egitarauak gorde ahal izateko.</p>
-          </div>
-        </ion-slide>
+    <ion-slide>
+      <div class="img">
+        <ion-img img src="../../assets/icon/favicon.ico" width="150px" height="250px"></ion-img>
+      </div>
+      <div>
+        <h2>ARRASATE APP</h2>
+        <p>{{"Ongi etorri udaleko app berri honetara" | translate}}</p>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="diag">
+        <ion-icon name="paper" color="primary"></ion-icon>
+      </div>
+      <div>
+        <h2>{{"Albiste zein agenda irakurri" | translate}}</h2>
+        <p>Nahi dituzun albisteak irakurtzeko eta agendan burutzear dauden egitarau desberdinak irakurtzeko aukera</p>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="diag">
+        <ion-icon name="body" color="primary"></ion-icon>
+      </div>
+      <div>
+        <h2>Saioa hasteko erregistratzeko aukera</h2>
+        <p>Erregistratu zaitez gurekin ! Albiste zein agendako egitarauak gorde ahal izateko.</p>
+      </div>
+    </ion-slide>
 
   </ion-slides>
   <button (click)="skip()" id="skip">{{ skipMsg | translate}}</button>

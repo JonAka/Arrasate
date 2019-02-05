@@ -91,12 +91,12 @@ export class NewsdetailmodalPage {
     });
     toast.present();
   }
- /*  removeNewsData() {
-    this.user = firebase.auth().currentUser.uid;
-    const albi = this.db.object('/user/' + this.user + '/albistea/' + this.idkey);
-    albi.remove();
-    this.isFavorite = false;
-    this.storage.set('isFavorite', this.isFavorite);
-  } */
+  /*  removeNewsData() {
+     this.user = firebase.auth().currentUser.uid;
+     const albi = this.db.object('/user/' + this.user + '/albistea/' + this.idkey);
+     albi.remove();
+     this.isFavorite = false;
+     this.storage.set('isFavorite', this.isFavorite);
+   } */
 
 }

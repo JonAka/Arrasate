@@ -54,12 +54,12 @@
   <div [ngSwitch]=" type">
     <ion-list *ngSwitchCase="'agenda'">
       <ion-item *ngFor="let item of eventitem">
-            <div (click)="openEventModal(item['@id'])">
-              <img src="{{item.image.download}}" />
-              <h2 text-wrap>
-                {{item.title}}
-              </h2>
-            </div>
+        <div (click)="openEventModal(item['@id'])">
+          <img src="{{item.image.download}}" />
+          <h2 text-wrap>
+            {{item.title}}
+          </h2>
+        </div>
         <button ion-button (click)="removeEventData(i)">
           <ion-icon name="trash"></ion-icon>
           {{"Ezabatu" | translate}}

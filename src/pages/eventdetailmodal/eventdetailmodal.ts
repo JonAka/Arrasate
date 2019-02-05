@@ -30,6 +30,7 @@ export class EventdetailmodalPage {
   logeatuta: boolean;
   user;
   agendakey: Observable<any>;
+
   constructor(public arrasateService: ArrasateService,
     public navCtrl: NavController,
     public alertCtrl: AlertController,
@@ -54,11 +55,8 @@ export class EventdetailmodalPage {
   }
 
   getAgendaDetail(item_id) {
-
     this.arrasateService.getAgendaDetail(item_id).subscribe(res => {
-
       this.agendaDetail = res;
-
       console.log('ITEM: ', res);
     })
   }
@@ -77,15 +75,9 @@ export class EventdetailmodalPage {
         this.agendakey = ref.key;
         console.log("ref", this.agendakey);
         this.storage.set('Agenda Detail', this.agendakey);
-
       });
-
-
     }
     this.isFavorite = true;
-
-
-
     const toast = this.toastCtrl.create({
       message: 'Gustokoenetara gehituta  !',
       duration: 3200
@@ -93,11 +85,11 @@ export class EventdetailmodalPage {
     toast.present();
   }
 
- /*  removeEventData() {
-    this.user = firebase.auth().currentUser.uid;
-    const agend = this.db.object('/user/' + this.user + '/agenda/' + this.agendakey);
-    agend.remove();
-    this.isFavorite = false;
-  } */
+  /*  removeEventData() {
+     this.user = firebase.auth().currentUser.uid;
+     const agend = this.db.object('/user/' + this.user + '/agenda/' + this.agendakey);
+     agend.remove();
+     this.isFavorite = false;
+   } */
 }
 
