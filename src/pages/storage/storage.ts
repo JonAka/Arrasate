@@ -3,6 +3,7 @@ import { NavController, NavParams, AlertController, ModalController } from 'ioni
 
 import { ArrasateService } from '../../providers/arrasate-service/arrasate-service';
 import { NewsdetailmodalPage } from '../newsdetailmodal/newsdetailmodal';
+import { EventdetailmodalPage } from '../eventdetailmodal/eventdetailmodal';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import firebase from 'firebase';
@@ -53,7 +54,7 @@ export class StoragePage {
   getEventItems() {
     this.db.object('user/' + this.user + '/agenda/').valueChanges().subscribe(res => {
       if (res) {
-        
+
         for (let agendkey of Object.keys(res)) {
           this.eventitem.push(res[agendkey][0])
           this.agendkey = agendkey;
@@ -77,6 +78,7 @@ export class StoragePage {
     });
 
   }
+
   /* Gustoko albisteak ezabatzeko  */
   removeNewsData() {
     console.log("REF EZABATU: ", this.key);
@@ -101,7 +103,7 @@ export class StoragePage {
       subTitle: 'EZABATUTA !',
       buttons: ['Ados']
     });
-    console.log("AGENDA KEY : " , this.agendkey);
+    console.log("AGENDA KEY : ", this.agendkey);
     this.navCtrl.pop();
     alert.present();
 
@@ -111,5 +113,8 @@ export class StoragePage {
     let openNewsModal = this.modalController.create(NewsdetailmodalPage, { url: item_url });
     openNewsModal.present();
   }
-
+  openEventModal(item_url_event) {
+    let openEventModal = this.modalController.create(EventdetailmodalPage, { url: item_url_event });
+    openEventModal.present();
+  }
 }

@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { ArrasateService } from '../../providers/arrasate-service/arrasate-service';
 import { Observable } from 'rxjs';
+import { Storage } from '@ionic/storage';
 import { AngularFireAuth } from 'angularfire2/auth';
 //import { HttpClient } from '@angular/common/http';
 
@@ -42,7 +43,8 @@ export class NewsdetailmodalPage {
     public auth: AuthProvider,
     public db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    private storage: Storage
   ) {
     this.afAuth.auth.onAuthStateChanged(user => {
       if (user) {
@@ -74,27 +76,27 @@ export class NewsdetailmodalPage {
     const itemRef = this.db.list('/user/' + this.user + '/albistea');
 
     if (this.user) {
-      console.log(".", this.user);
       itemRef.push([this.albisteDetail]).then(ref => {
         this.idkey = ref.key;
-        console.log("ref", this.idkey);
+        console.log("KEY : ", this.idkey);
+        this.storage.set('albistekey', this.idkey);
       });
-
 
     }
     this.isFavorite = true;
-    this.isFavorite = true;
+    this.storage.set('isFavorite', this.isFavorite);
     const toast = this.toastCtrl.create({
       message: 'Gustokoenetara gehituta  !',
       duration: 3200
     });
     toast.present();
   }
-  removeNewsData() {
+ /*  removeNewsData() {
     this.user = firebase.auth().currentUser.uid;
     const albi = this.db.object('/user/' + this.user + '/albistea/' + this.idkey);
     albi.remove();
     this.isFavorite = false;
-  }
+    this.storage.set('isFavorite', this.isFavorite);
+  } */
 
 }

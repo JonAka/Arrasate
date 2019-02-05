@@ -32,40 +32,38 @@
 
   </ion-segment>
 
+  <!--ALBISTEAK-->
   <div [ngSwitch]="type">
     <ion-list *ngSwitchCase="'albisteak'">
-      <ion-item *ngFor="let item of newsitem" (click)="openNewsModal(item['@id'])">
-        <div>
+      <ion-item *ngFor="let item of newsitem">
+        <div (click)="openNewsModal(item['@id'])">
           <img src="{{item.image.download}}" />
           <h2 text-wrap>
             {{item.title}}
           </h2>
         </div>
+        <button ion-button (click)="removeNewsData(i)">
+          <ion-icon name="trash"></ion-icon>
+          {{"Ezabatu" | translate}}
+        </button>
       </ion-item>
-
-
     </ion-list>
   </div>
 
+  <!--AGENDA-->
   <div [ngSwitch]=" type">
     <ion-list *ngSwitchCase="'agenda'">
       <ion-item *ngFor="let item of eventitem">
-        <ion-slides>
-          <ion-slide>
-            <div>
+            <div (click)="openEventModal(item['@id'])">
               <img src="{{item.image.download}}" />
-
               <h2 text-wrap>
                 {{item.title}}
               </h2>
             </div>
-          </ion-slide>
-          <ion-slide>
-            <div>
-              <p [innerHtml]="item.text.data" text-wrap></p>
-            </div>
-          </ion-slide>
-        </ion-slides>
+        <button ion-button (click)="removeEventData(i)">
+          <ion-icon name="trash"></ion-icon>
+          {{"Ezabatu" | translate}}
+        </button>
       </ion-item>
     </ion-list>
   </div>

@@ -93,12 +93,11 @@ export class EventdetailmodalPage {
     toast.present();
   }
 
-  removeEventData() {
+ /*  removeEventData() {
     this.user = firebase.auth().currentUser.uid;
     const agend = this.db.object('/user/' + this.user + '/agenda/' + this.agendakey);
     agend.remove();
     this.isFavorite = false;
-
-  }
+  } */
 }
 

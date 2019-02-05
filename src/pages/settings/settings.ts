@@ -35,7 +35,7 @@ export class SettingsPage {
     public arrasateService: ArrasateService, ) {
     this.isToggled = false;
     this.logeatuta = this.auth.logged;
-    
+
 
     this.afAuth.auth.onAuthStateChanged(user => {
       if (user) {
@@ -43,7 +43,7 @@ export class SettingsPage {
       } else {
         this.logeatuta = false;
       }
-    }); 
+    });
     console.log("logeatuta : ", this.afAuth.auth.currentUser);
     this.getStoredName();
   }
@@ -65,7 +65,7 @@ export class SettingsPage {
     this.translate.setDefaultLang(selectedValue);
     this.storage.set('language', selectedValue);
   }
-  getStoredName(){
+  getStoredName() {
 
     this.storage.get('Izena').then(name => {
 
