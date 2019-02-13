@@ -48,11 +48,11 @@ export class ArrasateService {
     });
     if (this.language == 'eu') {
       this.section = 'albisteak';
-      return this.http.get('https://www.arrasate.eus/' + this.language + '/' + this.section + '/@search?fullobjects=true&sort_order=reverse&sort_on=effective&b_size=30', { headers: headers })
+      return this.http.get('https://www.arrasate.eus/' + this.language + '/' + this.section + '/@search?fullobjects=true&sort_order=reverse&sort_on=effective', { headers: headers })
     }
     if (this.language == 'es') {
       this.section = 'noticias';
-      return this.http.get('https://www.arrasate.eus/' + this.language + '/' + this.section + '/@search?fullobjects=true&sort_order=reverse&sort_on=effective&b_size=30', { headers: headers })
+      return this.http.get('https://www.arrasate.eus/' + this.language + '/' + this.section + '/@search?fullobjects=true&sort_order=reverse&sort_on=effective', { headers: headers })
     }
   }
 
@@ -60,7 +60,7 @@ export class ArrasateService {
     let headers = new HttpHeaders({
       'Accept': 'application/json',
     });
-    return this.http.get('https://www.arrasate.eus/' + this.language + '/agenda/@search?fullobjects=true&sort_order=reverse&sort_on=effective&b_size=30', { headers: headers })
+    return this.http.get('https://www.arrasate.eus/' + this.language + '/agenda/@search?fullobjects=true&sort_order=reverse&sort_on=effective', { headers: headers })
   }
 
   getAlbisteDetail(item_url) {

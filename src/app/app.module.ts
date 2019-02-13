@@ -93,8 +93,7 @@ export function createTranslateLoader(http: HttpClient) {
     SettingsPage,
     TabsPage,
     MainPage,
-    StoragePage,
-    FavdetailPage
+    StoragePage
 
 
   ],

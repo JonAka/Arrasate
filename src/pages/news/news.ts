@@ -27,6 +27,7 @@ export class NewsPage {
 
   getAlbisteak() {
     this.arrasateService.getAlbisteak().subscribe(res => {
+      console.log("RES ALBISTE : ",res)
       this.albisteList = res['items'];
     })
   }
