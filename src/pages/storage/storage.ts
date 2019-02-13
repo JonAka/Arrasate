@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ɵConsole } from '@angular/core';
 import { NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
 
 import { ArrasateService } from '../../providers/arrasate-service/arrasate-service';
@@ -31,8 +31,6 @@ export class StoragePage {
   newsitem = [];
   toremove;
   eventitem = [];
-  key: string;
-  agendkey: string;
 
   constructor(
 
@@ -54,35 +52,27 @@ export class StoragePage {
   getEventItems() {
     this.db.object('user/' + this.user + '/agenda/').valueChanges().subscribe(res => {
       if (res) {
-
         for (let agendkey of Object.keys(res)) {
-          this.eventitem.push(res[agendkey][0])
-          this.agendkey = agendkey;
-          console.log("Event res : ", this.agendkey);
+          this.eventitem.push({ data: res[agendkey][0], firebase_id: agendkey })
         };
       }
     });
-
   }
   /* Gustoko albisteetako albisteak bistaratzeko  */
   getNewsItems() {
     this.db.object('user/' + this.user + '/albistea/').valueChanges().subscribe(res => {
       if (res) {
         for (let key of Object.keys(res)) {
-          this.newsitem.push(res[key][0])
-          this.key = key;
-          console.log("Ref : ", this.key);
+          this.newsitem.push({ data: res[key][0], firebase_id: key })
+          console.log("ITEM DATA : " , this.newsitem);
         };
       }
-
     });
-
   }
 
   /* Gustoko albisteak ezabatzeko  */
-  removeNewsData() {
-    console.log("REF EZABATU: ", this.key);
-    const removeitem = this.db.list('user/' + this.user + '/albistea/' + this.key)
+  removeNewsData(item) {
+    const removeitem = this.db.list('user/' + this.user + '/albistea/' + item)
     removeitem.remove();
 
     let alert = this.alertCtrl.create({
@@ -95,26 +85,25 @@ export class StoragePage {
   }
 
   /* Gustoko agendako albisteak ezabatzeko */
-  removeEventData() {
-    const agend = this.db.object('/user/' + this.user + '/agenda/' + this.agendkey);
+  removeEventData(item) {
+    console.log("ITEM :", item);
+    const agend = this.db.object('/user/' + this.user + '/agenda/' + item);
     agend.remove();
 
     let alert = this.alertCtrl.create({
       subTitle: 'EZABATUTA !',
       buttons: ['Ados']
     });
-    console.log("AGENDA KEY : ", this.agendkey);
     this.navCtrl.pop();
     alert.present();
 
   }
   openNewsModal(item_url) {
-    console.log("ITEM: ", item_url);
-    let openNewsModal = this.modalController.create(NewsdetailmodalPage, { url: item_url });
+    let openNewsModal = this.modalController.create(NewsdetailmodalPage, { url: item_url['@id'] });
     openNewsModal.present();
   }
   openEventModal(item_url_event) {
-    let openEventModal = this.modalController.create(EventdetailmodalPage, { url: item_url_event });
+    let openEventModal = this.modalController.create(EventdetailmodalPage, { url: item_url_event['@id'] });
     openEventModal.present();
   }
 }

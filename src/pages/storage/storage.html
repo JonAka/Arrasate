@@ -36,13 +36,13 @@
   <div [ngSwitch]="type">
     <ion-list *ngSwitchCase="'albisteak'">
       <ion-item *ngFor="let item of newsitem">
-        <div (click)="openNewsModal(item['@id'])">
-          <img src="{{item.image.download}}" />
+        <div (click)="openNewsModal(item.data)">
+          <img src="{{item.data.image.download}}" />
           <h2 text-wrap>
-            {{item.title}}
+            {{item.data.title}}
           </h2>
         </div>
-        <button ion-button (click)="removeNewsData(i)">
+        <button ion-button (click)="removeNewsData(item.firebase_id)">
           <ion-icon name="trash"></ion-icon>
           {{"Ezabatu" | translate}}
         </button>
@@ -54,13 +54,13 @@
   <div [ngSwitch]=" type">
     <ion-list *ngSwitchCase="'agenda'">
       <ion-item *ngFor="let item of eventitem">
-        <div (click)="openEventModal(item['@id'])">
-          <img src="{{item.image.download}}" />
+        <div (click)="openEventModal(item.data)">
+          <img src="{{item.data.image.download}}" />
           <h2 text-wrap>
-            {{item.title}}
+            {{item.data.title}}
           </h2>
         </div>
-        <button ion-button (click)="removeEventData(i)">
+        <button ion-button (click)="removeEventData(item.firebase_id)">
           <ion-icon name="trash"></ion-icon>
           {{"Ezabatu" | translate}}
         </button>
