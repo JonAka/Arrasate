@@ -30,11 +30,11 @@ export class HomePage {
     this.getNewsImage();
   }
 
-
   getUdalak() {
     this.arrasateService.getUdalak().subscribe(res => {
       this.udalakList = res;
       this.data = this.udalakList['text']['data'];
+      console.log("DATA : " ,this.data);
     })
   }
 
